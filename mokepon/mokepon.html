@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MOKEPON!</title>
+        <script src="js/mokepon.js"></script>
+        <link rel="stylesheet" href="./styles.css"/>
     </head>
     <body>
         <h1>MOKEPON! 💦🔥🪨</h1>
@@ -25,24 +27,24 @@
                 <input type="radio" name="pet" id="charchar"/>
                 <label for="charchar">Charchar</label>
             </p>
-            <p><button>Select</button></p>
+            <p><button id="btn-pet">Select</button></p>
         </section>
         <section id="select-attack">
             <h2>Elige tu ataque:</h2>
 
-            <p>Tu mascota tiene <span>3</span> vidas</p>
-            <p>La mascota del enemigo tiene <span>3</span> vidas</p>
+            <p>Tu mascota <span id="pet-player"></span> tiene <span id="player-live">3</span> vidas</p>
+            <p>La mascota <span id="pet-pc"></span> del enemigo tiene <span id="pc-live">3</span> vidas</p>
             <p>
-                <button>Fire🔥</button>
-                <button>Water💦</button>
-                <button>Ground🪨</button>
+                <button id="btn-fire">Fire🔥</button>
+                <button id="btn-water">Water💦</button>
+                <button id="btn-ground">Ground🪨</button>
             </p>
         </section>
         <section id="message">
-            <p>Tu mas cota ataco con FUEGO, la mascota del enemigo ataco con TIERRA - GANASTE🎉</p>
+
         </section>
         <section id="reset">
-            <p><button>Reset</button></p>
+            <p><button id="btn-reset">Reset</button></p>
         </section>
     </body>
 </html>
