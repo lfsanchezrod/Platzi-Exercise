@@ -1,3 +1,93 @@
-h1 {
-    color: lightcoral;
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&family=Poppins:wght@300&display=swap');
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+#select-pet{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    color: crimson;
+    width: 310px;
+    height: 50px;
+    font-family: 'Poor Story', cursive;
+    font-size: 60px;
+}
+
+.subtitulos{
+
+}
+
+.tarjeta-de-mokepon{
+    width: 180px;
+    height: 100px;
+    background: aqua;
+    padding: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: crimson;
+    font-style:oblique;
+}
+
+.tarjeta-de-mokepon img{
+    width: 80px;
+}
+
+input{
+    display: none;
+}
+
+input:checked + label{
+    background-color: crimson ;
+}
+
+#select-attack{
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-select{
+    width: 210px;
+    height: 50px;
+    color: blueviolet;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid red;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.tarjetas, .tarjetas-ataques{
+    display: flex;
+    gap: 10px;
+}
+
+.attacks{
+    display: grid;
+    grid-template-columns: 100px 100px;
+    color: salmon;
+}
+.player-attack, .pc-attack{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media (max-width:360px) {
+    .tarjetas, .tarjetas-ataques{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 }

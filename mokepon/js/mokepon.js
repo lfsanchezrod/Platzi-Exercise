@@ -74,11 +74,24 @@ function battle() {
 
 function createMessage(resultBattle) {
     let sectionMessage = document.getElementById("message")
-    let paragraph = document.createElement("p")
-    paragraph.innerHTML = "Your pet attack with " + playerAttackGlobal +
-     ", la mascota del enemigo ataco con " + pcAttackGlobal + " " +
-       resultBattle
-    sectionMessage.appendChild(paragraph)
+    let sectionMessagePlayer = document.getElementById("message-attack-player")
+    let sectionMessagePc = document.getElementById("message-attack-pc")
+    
+
+    let newAttackPlayer = document.createElement("p")
+    let newAttackPc = document.createElement("p")
+
+    sectionMessage.innerHTML = resultBattle
+    newAttackPlayer.innerHTML = playerAttackGlobal
+    newAttackPc.innerHTML = pcAttackGlobal
+
+    // let sectionMessage = document.getElementById("message")
+    // let paragraph = document.createElement("p")
+    // paragraph.innerHTML = "Your pet attack with " + playerAttackGlobal +
+    //  ", la mascota del enemigo ataco con " + pcAttackGlobal + " " +
+    //    resultBattle
+    sectionMessagePlayer.appendChild(newAttackPlayer)
+    sectionMessagePc.appendChild(newAttackPc)
 }
 
 function selectPlayerPet() {
@@ -90,21 +103,24 @@ function selectPlayerPet() {
 
    if (inputPitochu.checked) {
         spanPetPlayer.innerHTML = "Pitochu"
+        selectPcPet()
     //    alert("You Select a Pitochu")
     } else if (inputPaladio.checked) {
         spanPetPlayer.innerHTML = "Paladio"
+        selectPcPet()
     //    alert("You Select a Paladio")
     } else if (inputNico.checked) {
         spanPetPlayer.innerHTML = "Nico"
+        selectPcPet()
     //    alert("You Select a Nico")
     } else if (inputCharchar.checked) {
         spanPetPlayer.innerHTML = "Charchar"
+        selectPcPet()
     //    alert("You Select Charchar")
     } else {
     //    alert("Select pet")
     }
 
-    selectPcPet()
 }
 
 function selectPcPet() {
@@ -121,7 +137,7 @@ function selectPcPet() {
         spanPetPc.innerHTML = "Charchar"
     }
    let sectionAttackSelect = document.getElementById("select-attack")
-   sectionAttackSelect.style.display = "block"
+   sectionAttackSelect.style.display = "flex"
 
    let sectionPetPlayer = document.getElementById("select-pet")
    sectionPetPlayer.style.display = "none"
@@ -141,9 +157,9 @@ function lives(params) {
 
 function createFinalMessage(finalResult) {
     let sectionMessage = document.getElementById("message")
-    let paragraph = document.createElement("p")
-    paragraph.innerHTML = finalResult
-    sectionMessage.appendChild(paragraph)
+    // let paragraph = document.createElement("p")
+    sectionMessage.innerHTML = finalResult
+    //sectionMessage.appendChild(paragraph)
 
     let btnFire=document.getElementById("btn-fire")
     btnFire.disabled = true

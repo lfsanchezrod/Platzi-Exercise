@@ -4,47 +4,75 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MOKEPON!</title>
-        <script src="js/mokepon.js"></script>
         <link rel="stylesheet" href="./styles.css"/>
     </head>
     <body>
-        <h1>MOKEPON! 💦🔥🪨</h1>
         <section id="select-pet">
-            <h2>Elige tu mascota:</h2>
-            <p>
-                <input type="radio" name="pet" id="pitochu"/>
-                <label for="pitochu">Pitochu</label>
-            </p>
-            <p>
-                <input type="radio" name="pet" id="paladio"/>
-                <label for="paladio">Paladio</label>
-            </p>
-            <p>
-                <input type="radio" name="pet" id="nico"/>
-                <label for="nico">Nico</label>
-            </p>
-            <p>
-                <input type="radio" name="pet" id="charchar"/>
-                <label for="charchar">Charchar</label>
-            </p>
-            <p><button id="btn-pet">Select</button></p>
+            <h1 id="tlMOKEMON" class="title">MOKEPON!</h1>
+
+            <h2 class="subtitulo">Elige tu mascota:</h2>
+
+            <div class="tarjetas">
+
+                    <input type="radio" name="pet" id="pitochu"/>
+                    <label class="tarjeta-de-mokepon" for="pitochu">
+                        <p>Pitochu</p>
+                        <img src="./assets/mokepons_mokepon_capipepo_attack.png" alt="Pitochu"/>
+                    </label>
+
+                    <input type="radio" name="pet" id="paladio"/>
+                    <label class="tarjeta-de-mokepon" for="paladio">
+                        <p>Paladio</p>
+                        <img src="./assets/mokepons_mokepon_hipodoge_attack.png" alt="Paladio"/>
+                    </label>
+
+                    <input type="radio" name="pet" id="nico"/>
+                    <label class="tarjeta-de-mokepon" for="nico">
+                        <p>Nico</p>
+                        <img src="./assets/mokepons_mokepon_ratigueya_attack.png" alt="Nico"/>
+                    </label>
+
+                    <input type="radio" name="pet" id="charchar"/>
+                    <label class="tarjeta-de-mokepon" for="charchar">
+                        <p>Charchar</p>
+                        <img src="./assets/mokepons_mokepon_charchar_attack.png" alt="Charchar"/>
+                    </label>
+
+            </div>
+            <p><button id="btn-pet" class="btn-select">Select</button></p>
         </section>
         <section id="select-attack">
+            <h1 id="tlMOKEMON" class="title">MOKEPON!</h1>
+
             <h2>Elige tu ataque:</h2>
+            <div class="tarjetas-ataques">
+                <button id="btn-fire" class="btn-select">Fire🔥</button>
+                <button id="btn-water" class="btn-select">Water💦</button>
+                <button id="btn-ground" class="btn-select">Ground🪨</button>
+            </div>
 
-            <p>Tu mascota <span id="pet-player"></span> tiene <span id="player-live">3</span> vidas</p>
-            <p>La mascota <span id="pet-pc"></span> del enemigo tiene <span id="pc-live">3</span> vidas</p>
-            <p>
-                <button id="btn-fire">Fire🔥</button>
-                <button id="btn-water">Water💦</button>
-                <button id="btn-ground">Ground🪨</button>
-            </p>
-        </section>
-        <section id="message">
+            <div>
+                <section id="messages">
+                    <p id="message"></p>
+                </section>
 
+                <section id="reset">
+                    <p><button id="btn-reset" class="btn-select">Reset</button></p>
+                </section>
+            </div>
+            <div class="attacks">
+                <div class="player-attack">
+                    <p id="player-live">3</p>
+                    <p id="pet-player"></p>
+                    <div id="message-attack-player"></div>
+                </div>
+                <div class="pc-attack">
+                    <p id="pc-live">3</p>
+                    <p id="pet-pc"></p>
+                    <div id="message-attack-pc"></div>
+                </div>
+             </div>
         </section>
-        <section id="reset">
-            <p><button id="btn-reset">Reset</button></p>
-        </section>
+        <script src="./js/mokepon.js"></script>
     </body>
 </html>
