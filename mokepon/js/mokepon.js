@@ -30,6 +30,7 @@ class Mokepon{
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
+        this.ataques =[]
     }
 }
 
@@ -43,6 +44,38 @@ let nico = new Mokepon("Nico","./assets/mokepons_mokepon_ratigueya_attack.png",5
 let charchar = new Mokepon("Charchar","./assets/mokepons_mokepon_charchar_attack.png" ,5)
 
 mokepones.push(pitochu,paladio,nico,charchar)
+
+pitochu.ataques.push(
+    {nombre:'💧',id:'btn-water'},
+    {nombre:'💧',id:'btn-water'},
+    {nombre:'💧',id:'btn-water'},
+    {nombre:'🪨',id:'btn-ground'},
+    {nombre:'🔥',id:'btn-fire'}
+)
+
+paladio.ataques.push(
+    {nombre:'🪨',id:'btn-ground'},
+    {nombre:'🪨',id:'btn-ground'},
+    {nombre:'💧',id:'btn-water'},
+    {nombre:'🪨',id:'btn-ground'},
+    {nombre:'🔥',id:'btn-fire'}
+)
+
+nico.ataques.push(
+    {nombre:'🔥',id:'btn-fire'},
+    {nombre:'🪨',id:'btn-ground'},
+    {nombre:'💧',id:'btn-water'},
+    {nombre:'🪨',id:'btn-ground'},
+    {nombre:'🔥',id:'btn-fire'}
+)
+
+charchar.ataques.push(
+    {nombre:'🔥',id:'btn-fire'},
+    {nombre:'🔥',id:'btn-fire'},
+    {nombre:'💧',id:'btn-water'},
+    {nombre:'🪨',id:'btn-water'},
+    {nombre:'🔥',id:'btn-fire'}
+)
 
 console.log(mokepones)
 
