@@ -1,28 +1,41 @@
+const sectionAttackSelect = document.getElementById("select-attack")
+const sectionReset = document.getElementById("reset")
+const spanPetAttackPc = document.getElementById("attack-pc")
+const spanLivesPlayer = document.getElementById("player-live")
+const spanLivesEnenemy = document.getElementById("pc-live")
+const sectionMessage = document.getElementById("message")
+const sectionMessagePlayer = document.getElementById("message-attack-player")
+const sectionMessagePc = document.getElementById("message-attack-pc")
+
+const inputPitochu = document.getElementById("pitochu")
+const inputPaladio = document.getElementById("paladio")
+const inputNico = document.getElementById("nico")
+const inputCharchar = document.getElementById("charchar")
+const spanPetPlayer = document.getElementById("pet-player")
+const spanPetPc = document.getElementById("pet-pc")
+
+const sectionPetPlayer = document.getElementById("select-pet")
+const btnFire=document.getElementById("btn-fire")
+const btnGround=document.getElementById("btn-ground")
+const btnWater=document.getElementById("btn-water")
+
 let playerAttackGlobal
-let pcAttackGlobal
 let playerLivesGlobal = 3
 let pcLivesGlobal = 3
 
+function btnGnr(element,funcionespecial) {
+    let btnGeneral=document.getElementById(element)
+    btnGeneral.addEventListener("click",funcionespecial) 
+}
 
 function playGame() {
-   let sectionAttackSelect = document.getElementById("select-attack")
    sectionAttackSelect.style.display = "none"
-
-   let sectionReset = document.getElementById("reset")
    sectionReset.style.display = "none"
-
-    let btnPet=document.getElementById("btn-pet")
-    btnPet.addEventListener("click",selectPlayerPet) 
-    
-    let btnFire=document.getElementById("btn-fire")
-    btnFire.addEventListener("click",attackFire) 
-    let btnWater=document.getElementById("btn-water")
-    btnWater.addEventListener("click",attackWater) 
-    let btnGround=document.getElementById("btn-ground")
-    btnGround.addEventListener("click",attackGround)
-    
-    let btnReset=document.getElementById("btn-reset")
-    btnReset.addEventListener("click",resetGame)
+   btnGnr("btn-pet",selectPlayerPet)
+   btnGnr("btn-water",attackWater)
+   btnGnr("btn-ground",attackGround)
+   btnGnr("btn-fire",attackFire)
+   btnGnr("btn-reset",resetGame)
 }
 
 function attackFire() {
@@ -42,8 +55,6 @@ function attackGround() {
 
 function attackPc() {
     let randomAttack = random(1,3)
-    let spanPetAttackPc = document.getElementById("attack-pc")
-
     if (randomAttack == 1) {
         pcAttackGlobal = "Fire"
     } else if (randomAttack == 2) {
@@ -55,9 +66,6 @@ function attackPc() {
 }
 
 function battle() {
-    let spanLivesPlayer = document.getElementById("player-live")
-    let spanLivesEnenemy = document.getElementById("pc-live")
-
     if (playerAttackGlobal == pcAttackGlobal) {
             createMessage("TIE")
        } else if ((playerAttackGlobal == "Fire" && pcAttackGlobal == "Ground")||(playerAttackGlobal == "Water" && pcAttackGlobal == "Fire") || (playerAttackGlobal == "Ground" && pcAttackGlobal == "Water")) {
@@ -73,34 +81,16 @@ function battle() {
 }
 
 function createMessage(resultBattle) {
-    let sectionMessage = document.getElementById("message")
-    let sectionMessagePlayer = document.getElementById("message-attack-player")
-    let sectionMessagePc = document.getElementById("message-attack-pc")
-    
-
     let newAttackPlayer = document.createElement("p")
     let newAttackPc = document.createElement("p")
-
     sectionMessage.innerHTML = resultBattle
     newAttackPlayer.innerHTML = playerAttackGlobal
     newAttackPc.innerHTML = pcAttackGlobal
-
-    // let sectionMessage = document.getElementById("message")
-    // let paragraph = document.createElement("p")
-    // paragraph.innerHTML = "Your pet attack with " + playerAttackGlobal +
-    //  ", la mascota del enemigo ataco con " + pcAttackGlobal + " " +
-    //    resultBattle
     sectionMessagePlayer.appendChild(newAttackPlayer)
     sectionMessagePc.appendChild(newAttackPc)
 }
 
 function selectPlayerPet() {
-   let inputPitochu = document.getElementById("pitochu")
-   let inputPaladio = document.getElementById("paladio")
-   let inputNico = document.getElementById("nico")
-   let inputCharchar = document.getElementById("charchar")
-   let spanPetPlayer = document.getElementById("pet-player")
-
    if (inputPitochu.checked) {
         spanPetPlayer.innerHTML = "Pitochu"
         selectPcPet()
@@ -120,13 +110,10 @@ function selectPlayerPet() {
     } else {
     //    alert("Select pet")
     }
-
 }
 
 function selectPcPet() {
     let randomPcPet = random(1,4)
-    let spanPetPc = document.getElementById("pet-pc")
-
     if (randomPcPet == 1) {
         spanPetPc.innerHTML = "Pitochu"
     } else if (randomPcPet == 2) {
@@ -136,10 +123,7 @@ function selectPcPet() {
     } else {
         spanPetPc.innerHTML = "Charchar"
     }
-   let sectionAttackSelect = document.getElementById("select-attack")
    sectionAttackSelect.style.display = "flex"
-
-   let sectionPetPlayer = document.getElementById("select-pet")
    sectionPetPlayer.style.display = "none"
 }
 
@@ -156,19 +140,10 @@ function lives(params) {
 }
 
 function createFinalMessage(finalResult) {
-    let sectionMessage = document.getElementById("message")
-    // let paragraph = document.createElement("p")
     sectionMessage.innerHTML = finalResult
-    //sectionMessage.appendChild(paragraph)
-
-    let btnFire=document.getElementById("btn-fire")
     btnFire.disabled = true
-    let btnWater=document.getElementById("btn-water")
     btnWater.disabled = true
-    let btnGround=document.getElementById("btn-ground")
     btnGround.disabled = true
-
-   let sectionReset = document.getElementById("reset")
    sectionReset.style.display = "block"
 }
 
