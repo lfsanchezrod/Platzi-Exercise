@@ -19,9 +19,32 @@ const btnFire=document.getElementById("btn-fire")
 const btnGround=document.getElementById("btn-ground")
 const btnWater=document.getElementById("btn-water")
 
+let mokepones = []
 let playerAttackGlobal
+let pcAttackGlobal
 let playerLivesGlobal = 3
 let pcLivesGlobal = 3
+
+class Mokepon{
+    constructor(nombre, foto,vida) {
+        this.nombre = nombre
+        this.foto = foto
+        this.vida = vida
+    }
+}
+
+
+let pitochu = new Mokepon("Pitochu","./assets/mokepons_mokepon_capipepo_attack.png",5)
+
+let paladio = new Mokepon("Paladio","./assets/mokepons_mokepon_hipodoge_attack.png",5)
+
+let nico = new Mokepon("Nico","./assets/mokepons_mokepon_ratigueya_attack.png",5)
+
+let charchar = new Mokepon("Charchar","./assets/mokepons_mokepon_charchar_attack.png" ,5)
+
+mokepones.push(pitochu,paladio,nico,charchar)
+
+console.log(mokepones)
 
 function btnGnr(element,funcionespecial) {
     let btnGeneral=document.getElementById(element)
