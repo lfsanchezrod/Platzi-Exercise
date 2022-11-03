@@ -18,12 +18,14 @@ const sectionPetPlayer = document.getElementById("select-pet")
 const btnFire=document.getElementById("btn-fire")
 const btnGround=document.getElementById("btn-ground")
 const btnWater=document.getElementById("btn-water")
+const contenedorTarjetas=document.getElementById("contenedorTarjetas")
 
 let mokepones = []
 let playerAttackGlobal
 let pcAttackGlobal
 let playerLivesGlobal = 3
 let pcLivesGlobal = 3
+let opcionDeMokepones
 
 class Mokepon{
     constructor(nombre, foto,vida) {
@@ -43,7 +45,6 @@ let nico = new Mokepon("Nico","./assets/mokepons_mokepon_ratigueya_attack.png",5
 
 let charchar = new Mokepon("Charchar","./assets/mokepons_mokepon_charchar_attack.png" ,5)
 
-mokepones.push(pitochu,paladio,nico,charchar)
 
 pitochu.ataques.push(
     {nombre:'💧',id:'btn-water'},
@@ -77,7 +78,7 @@ charchar.ataques.push(
     {nombre:'🔥',id:'btn-fire'}
 )
 
-console.log(mokepones)
+mokepones.push(pitochu,paladio,nico,charchar)
 
 function btnGnr(element,funcionespecial) {
     let btnGeneral=document.getElementById(element)
@@ -87,6 +88,18 @@ function btnGnr(element,funcionespecial) {
 function playGame() {
    sectionAttackSelect.style.display = "none"
    sectionReset.style.display = "none"
+
+    mokepones.forEach((mokepon) => {
+        opcionDeMokepones = `
+        <input type="radio" name="pet" id=${mokepon.nombre}/>
+        <label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
+            <p>${mokepon.nombre}</p>
+            <img src=${mokepon.foto} alt=${mokepon.nombre}/>
+        </label>
+        `
+        contenedorTarjetas.innerHTML += opcionDeMokepones
+    })
+
    btnGnr("btn-pet",selectPlayerPet)
    btnGnr("btn-water",attackWater)
    btnGnr("btn-ground",attackGround)
