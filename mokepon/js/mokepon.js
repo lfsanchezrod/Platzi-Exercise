@@ -7,10 +7,6 @@ const sectionMessage = document.getElementById("message")
 const sectionMessagePlayer = document.getElementById("message-attack-player")
 const sectionMessagePc = document.getElementById("message-attack-pc")
 
-const inputPitochu = document.getElementById("pitochu")
-const inputPaladio = document.getElementById("paladio")
-const inputNico = document.getElementById("nico")
-const inputCharchar = document.getElementById("charchar")
 const spanPetPlayer = document.getElementById("pet-player")
 const spanPetPc = document.getElementById("pet-pc")
 
@@ -26,6 +22,10 @@ let pcAttackGlobal
 let playerLivesGlobal = 3
 let pcLivesGlobal = 3
 let opcionDeMokepones
+let inputPitochu
+let inputPaladio
+let inputNico
+let inputCharchar
 
 class Mokepon{
     constructor(nombre, foto,vida) {
@@ -91,14 +91,21 @@ function playGame() {
 
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
-        <input type="radio" name="pet" id=${mokepon.nombre}/>
+        <input type="radio" name="pet" id=${mokepon.nombre} />
         <label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
             <p>${mokepon.nombre}</p>
             <img src=${mokepon.foto} alt=${mokepon.nombre}/>
         </label>
         `
+        console.log(mokepon.nombre)
         contenedorTarjetas.innerHTML += opcionDeMokepones
     })
+    
+    inputPitochu = document.getElementById("Pitochu")
+    inputPaladio = document.getElementById("Paladio")
+    inputNico = document.getElementById("Nico")
+    inputCharchar = document.getElementById("Charchar")
+    
 
    btnGnr("btn-pet",selectPlayerPet)
    btnGnr("btn-water",attackWater)
@@ -123,10 +130,10 @@ function attackGround() {
 }
 
 function attackPc() {
-    let randomAttack = random(1,3)
-    if (randomAttack == 1) {
+    let randomAttack = random(0,mokepones.ataques.length-1)
+    if (randomAttack == 0) {
         pcAttackGlobal = "Fire"
-    } else if (randomAttack == 2) {
+    } else if (randomAttack == 1) {
         pcAttackGlobal = "Water"
     } else {
         pcAttackGlobal = "Ground"
@@ -161,19 +168,19 @@ function createMessage(resultBattle) {
 
 function selectPlayerPet() {
    if (inputPitochu.checked) {
-        spanPetPlayer.innerHTML = "Pitochu"
+        spanPetPlayer.innerHTML = inputPitochu.id
         selectPcPet()
     //    alert("You Select a Pitochu")
     } else if (inputPaladio.checked) {
-        spanPetPlayer.innerHTML = "Paladio"
+        spanPetPlayer.innerHTML = inputPaladio.id
         selectPcPet()
     //    alert("You Select a Paladio")
     } else if (inputNico.checked) {
-        spanPetPlayer.innerHTML = "Nico"
+        spanPetPlayer.innerHTML = inputNico.id
         selectPcPet()
     //    alert("You Select a Nico")
     } else if (inputCharchar.checked) {
-        spanPetPlayer.innerHTML = "Charchar"
+        spanPetPlayer.innerHTML = inputCharchar.id
         selectPcPet()
     //    alert("You Select Charchar")
     } else {
@@ -182,17 +189,10 @@ function selectPlayerPet() {
 }
 
 function selectPcPet() {
-    let randomPcPet = random(1,4)
-    if (randomPcPet == 1) {
-        spanPetPc.innerHTML = "Pitochu"
-    } else if (randomPcPet == 2) {
-        spanPetPc.innerHTML = "Paladio"
-    } else if (randomPcPet == 3) {
-        spanPetPc.innerHTML = "Nico"
-    } else {
-        spanPetPc.innerHTML = "Charchar"
-    }
-   sectionAttackSelect.style.display = "flex"
+    let randomPcPet = random(0,mokepones.length-1)
+
+    spanPetPc.innerHTML = mokepones[randomPcPet].nombre
+    
    sectionPetPlayer.style.display = "none"
 }
 
