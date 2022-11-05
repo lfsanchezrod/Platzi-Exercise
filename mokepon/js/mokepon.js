@@ -11,12 +11,12 @@ const spanPetPlayer = document.getElementById("pet-player")
 const spanPetPc = document.getElementById("pet-pc")
 
 const sectionPetPlayer = document.getElementById("select-pet")
-const btnFire=document.getElementById("btn-fire")
-const btnGround=document.getElementById("btn-ground")
-const btnWater=document.getElementById("btn-water")
 const contenedorTarjetas=document.getElementById("contenedorTarjetas")
 
+const contenedorAtaques=document.getElementById("contenedorAtaques")
+
 let mokepones = []
+let mokeponPlayerSelect
 let playerAttackGlobal
 let pcAttackGlobal
 let playerLivesGlobal = 3
@@ -26,6 +26,12 @@ let inputPitochu
 let inputPaladio
 let inputNico
 let inputCharchar
+let ataquesMokepon
+let botones=[]
+let ataqueJugador=[]
+let btnFire
+let btnGround
+let btnWater
 
 class Mokepon{
     constructor(nombre, foto,vida) {
@@ -97,10 +103,10 @@ function playGame() {
             <img src=${mokepon.foto} alt=${mokepon.nombre}/>
         </label>
         `
-        console.log(mokepon.nombre)
         contenedorTarjetas.innerHTML += opcionDeMokepones
     })
-    
+
+
     inputPitochu = document.getElementById("Pitochu")
     inputPaladio = document.getElementById("Paladio")
     inputNico = document.getElementById("Nico")
@@ -108,29 +114,26 @@ function playGame() {
     
 
    btnGnr("btn-pet",selectPlayerPet)
-   btnGnr("btn-water",attackWater)
-   btnGnr("btn-ground",attackGround)
-   btnGnr("btn-fire",attackFire)
    btnGnr("btn-reset",resetGame)
 }
 
-function attackFire() {
-    playerAttackGlobal = "Fire"
-    attackPc()
-}
+// function attackFire() {
+//     playerAttackGlobal = "Fire"
+//     attackPc()
+// }
 
-function attackWater() {
-    playerAttackGlobal = "Water"
-    attackPc()
-}
+// function attackWater() {
+//     playerAttackGlobal = "Water"
+//     attackPc()
+// }
 
-function attackGround() {
-    playerAttackGlobal = "Ground"
-    attackPc()
-}
+// function attackGround() {
+//     playerAttackGlobal = "Ground"
+//     attackPc()
+// }
 
 function attackPc() {
-    let randomAttack = random(0,mokepones.ataques.length-1)
+    let randomAttack = random(0,2)
     if (randomAttack == 0) {
         pcAttackGlobal = "Fire"
     } else if (randomAttack == 1) {
@@ -169,30 +172,86 @@ function createMessage(resultBattle) {
 function selectPlayerPet() {
    if (inputPitochu.checked) {
         spanPetPlayer.innerHTML = inputPitochu.id
+        mokeponPlayerSelect = inputPitochu.id
         selectPcPet()
     //    alert("You Select a Pitochu")
     } else if (inputPaladio.checked) {
         spanPetPlayer.innerHTML = inputPaladio.id
+        mokeponPlayerSelect = inputPaladio.id
         selectPcPet()
     //    alert("You Select a Paladio")
     } else if (inputNico.checked) {
         spanPetPlayer.innerHTML = inputNico.id
+        mokeponPlayerSelect = inputNico.id
         selectPcPet()
     //    alert("You Select a Nico")
     } else if (inputCharchar.checked) {
         spanPetPlayer.innerHTML = inputCharchar.id
+        mokeponPlayerSelect = inputCharchar.id
         selectPcPet()
     //    alert("You Select Charchar")
     } else {
     //    alert("Select pet")
     }
+    extraerAtaques(mokeponPlayerSelect)
 }
+
+function extraerAtaques(mascotaJugador) {
+    let ataques
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador===mokepones[i].nombre) {
+            ataques = mokepones[i].ataques
+        }
+        
+    }
+    mostrarAtaques(ataques)
+}
+ function mostrarAtaques(ataques) {
+    ataques.forEach((ataque) => {
+        ataquesMokepon = `
+        <button id=${ataque.id} class="btn-select-attack">${ataque.nombre}</button>
+        `
+       // console.log(mokepon.nombre)
+       contenedorAtaques.innerHTML += ataquesMokepon
+    })
+    btnWater=document.getElementById("btn-water")
+    btnGround=document.getElementById("btn-ground")
+    btnFire=document.getElementById("btn-fire")
+    botones=document.querySelectorAll(".btn-select-attack")
+
+    // btnWater.addEventListener("click",attackWater)
+    // btnGround.addEventListener("click",attackGround)
+    // btnFire.addEventListener("click",attackFire)
+    secuenciaAtaques()
+ }
+
+ function secuenciaAtaques(){
+    botones.forEach((boton)=>{
+        boton.addEventListener('click', (e) => {
+            if (e.target.textContent === "🔥") {
+                ataqueJugador.push("FUEGO")
+                console.log(ataqueJugador)
+                boton.style.background = "#112f58"
+            }else if (e.target.textContent === "💧") {
+                ataqueJugador.push("AGUA")
+                console.log(ataqueJugador)
+                boton.style.background = "#112f58"
+            } else{
+                ataqueJugador.push("TIERRA")
+                console.log(ataqueJugador)
+                boton.style.background = "#112f58"
+            }
+            attackPc()
+        })
+    })
+ }
 
 function selectPcPet() {
     let randomPcPet = random(0,mokepones.length-1)
 
     spanPetPc.innerHTML = mokepones[randomPcPet].nombre
-    
+
+   sectionAttackSelect.style.display = "flex"
    sectionPetPlayer.style.display = "none"
 }
 
@@ -219,4 +278,5 @@ function createFinalMessage(finalResult) {
 function resetGame() {
     location.reload()
 }
+
 window.addEventListener("load", playGame)
