@@ -229,15 +229,15 @@ function extraerAtaques(mascotaJugador) {
     botones.forEach((boton)=>{
         boton.addEventListener('click', (e) => {
             if (e.target.textContent === "🔥") {
-                ataqueJugador.push("FUEGO")
+                ataqueJugador.push("Fire")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
             }else if (e.target.textContent === "💧") {
-                ataqueJugador.push("AGUA")
+                ataqueJugador.push("Water")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
             } else{
-                ataqueJugador.push("TIERRA")
+                ataqueJugador.push("Ground")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
             }
