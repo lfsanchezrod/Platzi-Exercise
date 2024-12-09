@@ -22,7 +22,7 @@ let pcAttackGlobal
 let playerLivesGlobal = 3
 let pcLivesGlobal = 3
 let opcionDeMokepones
-let inputPitochu
+let inputPikashu
 let inputPaladio
 let inputNico
 let inputCharchar
@@ -43,7 +43,7 @@ class Mokepon{
 }
 
 
-let pitochu = new Mokepon("Pitochu","./assets/mokepons_mokepon_capipepo_attack.png",5)
+let pikashu = new Mokepon("Pikashu","./assets/mokepons_mokepon_capipepo_attack.png",5)
 
 let paladio = new Mokepon("Paladio","./assets/mokepons_mokepon_hipodoge_attack.png",5)
 
@@ -52,7 +52,7 @@ let nico = new Mokepon("Nico","./assets/mokepons_mokepon_ratigueya_attack.png",5
 let charchar = new Mokepon("Charchar","./assets/mokepons_mokepon_charchar_attack.png" ,5)
 
 
-pitochu.ataques.push(
+pikashu.ataques.push(
     {nombre:'💧',id:'btn-water'},
     {nombre:'💧',id:'btn-water'},
     {nombre:'💧',id:'btn-water'},
@@ -84,7 +84,7 @@ charchar.ataques.push(
     {nombre:'🔥',id:'btn-fire'}
 )
 
-mokepones.push(pitochu,paladio,nico,charchar)
+mokepones.push(pikashu,paladio,nico,charchar)
 
 function btnGnr(element,funcionespecial) {
     let btnGeneral=document.getElementById(element)
@@ -107,7 +107,7 @@ function playGame() {
     })
 
 
-    inputPitochu = document.getElementById("Pitochu")
+    inputPikashu = document.getElementById("Pikashu")
     inputPaladio = document.getElementById("Paladio")
     inputNico = document.getElementById("Nico")
     inputCharchar = document.getElementById("Charchar")
@@ -170,11 +170,11 @@ function createMessage(resultBattle) {
 }
 
 function selectPlayerPet() {
-   if (inputPitochu.checked) {
-        spanPetPlayer.innerHTML = inputPitochu.id
-        mokeponPlayerSelect = inputPitochu.id
+   if (inputPikashu.checked) {
+        spanPetPlayer.innerHTML = inputPikashu.id
+        mokeponPlayerSelect = inputPikashu.id
         selectPcPet()
-    //    alert("You Select a Pitochu")
+    //    alert("You Select a Pikashu")
     } else if (inputPaladio.checked) {
         spanPetPlayer.innerHTML = inputPaladio.id
         mokeponPlayerSelect = inputPaladio.id
