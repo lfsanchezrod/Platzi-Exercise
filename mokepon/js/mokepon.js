@@ -11,9 +11,9 @@ const spanPetPlayer = document.getElementById("pet-player")
 const spanPetPc = document.getElementById("pet-pc")
 
 const sectionPetPlayer = document.getElementById("select-pet")
-const contenedorTarjetas=document.getElementById("contenedorTarjetas")
+const contenedorTarjetas = document.getElementById("contenedorTarjetas")
 
-const contenedorAtaques=document.getElementById("contenedorAtaques")
+const contenedorAtaques = document.getElementById("contenedorAtaques")
 
 let mokepones = []
 let mokeponPlayerSelect
@@ -22,78 +22,78 @@ let pcAttackGlobal
 let playerLivesGlobal = 3
 let pcLivesGlobal = 3
 let opcionDeMokepones
-let inputPitochu
+let inputPikashu
 let inputPaladio
 let inputNico
 let inputCharchar
 let ataquesMokepon
-let botones=[]
-let ataqueJugador=[]
+let botones = []
+let ataqueJugador = []
 let btnFire
 let btnGround
 let btnWater
 
-class Mokepon{
-    constructor(nombre, foto,vida) {
+class Mokepon {
+    constructor(nombre, foto, vida) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
-        this.ataques =[]
+        this.ataques = []
     }
 }
 
 
-let pitochu = new Mokepon("Pitochu","./assets/mokepons_mokepon_capipepo_attack.png",5)
+let pikashu = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5)
 
-let paladio = new Mokepon("Paladio","./assets/mokepons_mokepon_hipodoge_attack.png",5)
+let paladio = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5)
 
-let nico = new Mokepon("Nico","./assets/mokepons_mokepon_ratigueya_attack.png",5)
+let nico = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5)
 
-let charchar = new Mokepon("Charchar","./assets/mokepons_mokepon_charchar_attack.png" ,5)
+let charchar = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5)
 
 
-pitochu.ataques.push(
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'🔥',id:'btn-fire'}
+pikashu.ataques.push(
+    { nombre: '💧', id: 'btn-water' },
+    { nombre: '💧', id: 'btn-water' },
+    { nombre: '💧', id: 'btn-water' },
+    { nombre: '🪨', id: 'btn-ground' },
+    { nombre: '🔥', id: 'btn-fire' }
 )
 
 paladio.ataques.push(
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'🔥',id:'btn-fire'}
+    { nombre: '🪨', id: 'btn-ground' },
+    { nombre: '🪨', id: 'btn-ground' },
+    { nombre: '💧', id: 'btn-water' },
+    { nombre: '🪨', id: 'btn-ground' },
+    { nombre: '🔥', id: 'btn-fire' }
 )
 
 nico.ataques.push(
-    {nombre:'🔥',id:'btn-fire'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'🔥',id:'btn-fire'}
+    { nombre: '🔥', id: 'btn-fire' },
+    { nombre: '🪨', id: 'btn-ground' },
+    { nombre: '💧', id: 'btn-water' },
+    { nombre: '🪨', id: 'btn-ground' },
+    { nombre: '🔥', id: 'btn-fire' }
 )
 
 charchar.ataques.push(
-    {nombre:'🔥',id:'btn-fire'},
-    {nombre:'🔥',id:'btn-fire'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'🪨',id:'btn-water'},
-    {nombre:'🔥',id:'btn-fire'}
+    { nombre: '🔥', id: 'btn-fire' },
+    { nombre: '🔥', id: 'btn-fire' },
+    { nombre: '💧', id: 'btn-water' },
+    { nombre: '🪨', id: 'btn-water' },
+    { nombre: '🔥', id: 'btn-fire' }
 )
 
-mokepones.push(pitochu,paladio,nico,charchar)
+mokepones.push(pikashu, paladio, nico, charchar)
 
-function btnGnr(element,funcionespecial) {
-    let btnGeneral=document.getElementById(element)
-    btnGeneral.addEventListener("click",funcionespecial) 
+function btnGnr(element, funcionespecial) {
+    let btnGeneral = document.getElementById(element)
+    btnGeneral.addEventListener("click", funcionespecial)
 }
 
 function playGame() {
-   sectionAttackSelect.style.display = "none"
-   sectionReset.style.display = "none"
+    sectionAttackSelect.style.display = "none"
+    sectionReset.style.display = "none"
 
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
@@ -107,33 +107,33 @@ function playGame() {
     })
 
 
-    inputPitochu = document.getElementById("Pitochu")
+    inputPikashu = document.getElementById("Pikashu")
     inputPaladio = document.getElementById("Paladio")
     inputNico = document.getElementById("Nico")
     inputCharchar = document.getElementById("Charchar")
-    
 
-   btnGnr("btn-pet",selectPlayerPet)
-   btnGnr("btn-reset",resetGame)
+
+    btnGnr("btn-pet", selectPlayerPet)
+    btnGnr("btn-reset", resetGame)
 }
 
-// function attackFire() {
-//     playerAttackGlobal = "Fire"
-//     attackPc()
-// }
+function attackFire() {
+    playerAttackGlobal = "Fire"
+    attackPc()
+}
 
-// function attackWater() {
-//     playerAttackGlobal = "Water"
-//     attackPc()
-// }
+function attackWater() {
+    playerAttackGlobal = "Water"
+    attackPc()
+}
 
-// function attackGround() {
-//     playerAttackGlobal = "Ground"
-//     attackPc()
-// }
+function attackGround() {
+    playerAttackGlobal = "Ground"
+    attackPc()
+}
 
 function attackPc() {
-    let randomAttack = random(0,2)
+    let randomAttack = random(0, 2)
     if (randomAttack == 0) {
         pcAttackGlobal = "Fire"
     } else if (randomAttack == 1) {
@@ -146,16 +146,16 @@ function attackPc() {
 
 function battle() {
     if (playerAttackGlobal == pcAttackGlobal) {
-            createMessage("TIE")
-       } else if ((playerAttackGlobal == "Fire" && pcAttackGlobal == "Ground")||(playerAttackGlobal == "Water" && pcAttackGlobal == "Fire") || (playerAttackGlobal == "Ground" && pcAttackGlobal == "Water")) {
-            createMessage("You win")
-            pcLivesGlobal --
-            spanLivesEnenemy.innerHTML = pcLivesGlobal
-        } else {
-            createMessage("You lose")
-            playerLivesGlobal --
-            spanLivesPlayer.innerHTML = playerLivesGlobal
-        }
+        createMessage("TIE")
+    } else if ((playerAttackGlobal == "Fire" && pcAttackGlobal == "Ground") || (playerAttackGlobal == "Water" && pcAttackGlobal == "Fire") || (playerAttackGlobal == "Ground" && pcAttackGlobal == "Water")) {
+        createMessage("You win")
+        pcLivesGlobal--
+        spanLivesEnenemy.innerHTML = pcLivesGlobal
+    } else {
+        createMessage("You lose")
+        playerLivesGlobal--
+        spanLivesPlayer.innerHTML = playerLivesGlobal
+    }
     lives()
 }
 
@@ -170,28 +170,28 @@ function createMessage(resultBattle) {
 }
 
 function selectPlayerPet() {
-   if (inputPitochu.checked) {
-        spanPetPlayer.innerHTML = inputPitochu.id
-        mokeponPlayerSelect = inputPitochu.id
+    if (inputPikashu.checked) {
+        spanPetPlayer.innerHTML = inputPikashu.id
+        mokeponPlayerSelect = inputPikashu.id
         selectPcPet()
-    //    alert("You Select a Pitochu")
+        //    alert("You Select a Pikashu")
     } else if (inputPaladio.checked) {
         spanPetPlayer.innerHTML = inputPaladio.id
         mokeponPlayerSelect = inputPaladio.id
         selectPcPet()
-    //    alert("You Select a Paladio")
+        //    alert("You Select a Paladio")
     } else if (inputNico.checked) {
         spanPetPlayer.innerHTML = inputNico.id
         mokeponPlayerSelect = inputNico.id
         selectPcPet()
-    //    alert("You Select a Nico")
+        //    alert("You Select a Nico")
     } else if (inputCharchar.checked) {
         spanPetPlayer.innerHTML = inputCharchar.id
         mokeponPlayerSelect = inputCharchar.id
         selectPcPet()
-    //    alert("You Select Charchar")
+        //    alert("You Select Charchar")
     } else {
-    //    alert("Select pet")
+        //    alert("Select pet")
     }
     extraerAtaques(mokeponPlayerSelect)
 }
@@ -199,44 +199,44 @@ function selectPlayerPet() {
 function extraerAtaques(mascotaJugador) {
     let ataques
     for (let i = 0; i < mokepones.length; i++) {
-        if (mascotaJugador===mokepones[i].nombre) {
+        if (mascotaJugador === mokepones[i].nombre) {
             ataques = mokepones[i].ataques
         }
-        
+
     }
     mostrarAtaques(ataques)
 }
- function mostrarAtaques(ataques) {
+function mostrarAtaques(ataques) {
     ataques.forEach((ataque) => {
         ataquesMokepon = `
         <button id=${ataque.id} class="btn-select-attack">${ataque.nombre}</button>
         `
-       // console.log(mokepon.nombre)
-       contenedorAtaques.innerHTML += ataquesMokepon
+        // console.log(mokepon.nombre)
+        contenedorAtaques.innerHTML += ataquesMokepon
     })
-    btnWater=document.getElementById("btn-water")
-    btnGround=document.getElementById("btn-ground")
-    btnFire=document.getElementById("btn-fire")
-    botones=document.querySelectorAll(".btn-select-attack")
+    btnWater = document.getElementById("btn-water")
+    btnGround = document.getElementById("btn-ground")
+    btnFire = document.getElementById("btn-fire")
+    botones = document.querySelectorAll(".btn-select-attack")
 
-    // btnWater.addEventListener("click",attackWater)
-    // btnGround.addEventListener("click",attackGround)
-    // btnFire.addEventListener("click",attackFire)
+    btnWater.addEventListener("click", attackWater)
+    btnGround.addEventListener("click", attackGround)
+    btnFire.addEventListener("click", attackFire)
     secuenciaAtaques()
- }
+}
 
- function secuenciaAtaques(){
-    botones.forEach((boton)=>{
+function secuenciaAtaques() {
+    botones.forEach((boton) => {
         boton.addEventListener('click', (e) => {
             if (e.target.textContent === "🔥") {
                 ataqueJugador.push("Fire")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
-            }else if (e.target.textContent === "💧") {
+            } else if (e.target.textContent === "💧") {
                 ataqueJugador.push("Water")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
-            } else{
+            } else {
                 ataqueJugador.push("Ground")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
@@ -244,18 +244,18 @@ function extraerAtaques(mascotaJugador) {
             attackPc()
         })
     })
- }
+}
 
 function selectPcPet() {
-    let randomPcPet = random(0,mokepones.length-1)
+    let randomPcPet = random(0, mokepones.length - 1)
 
     spanPetPc.innerHTML = mokepones[randomPcPet].nombre
 
-   sectionAttackSelect.style.display = "flex"
-   sectionPetPlayer.style.display = "none"
+    sectionAttackSelect.style.display = "flex"
+    sectionPetPlayer.style.display = "none"
 }
 
-function random(min,max){
+function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
@@ -272,7 +272,7 @@ function createFinalMessage(finalResult) {
     btnFire.disabled = true
     btnWater.disabled = true
     btnGround.disabled = true
-   sectionReset.style.display = "block"
+    sectionReset.style.display = "block"
 }
 
 function resetGame() {
