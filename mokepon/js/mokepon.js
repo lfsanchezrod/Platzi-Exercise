@@ -119,17 +119,17 @@ function playGame() {
 
 function attackFire() {
     playerAttackGlobal = "Fire"
-    attackPc()
+    //attackPc()
 }
 
 function attackWater() {
     playerAttackGlobal = "Water"
-    attackPc()
+   // attackPc()
 }
 
 function attackGround() {
     playerAttackGlobal = "Ground"
-    attackPc()
+    //attackPc()
 }
 
 function attackPc() {
@@ -157,16 +157,6 @@ function battle() {
         spanLivesPlayer.innerHTML = playerLivesGlobal
     }
     lives()
-}
-
-function createMessage(resultBattle) {
-    let newAttackPlayer = document.createElement("p")
-    let newAttackPc = document.createElement("p")
-    sectionMessage.innerHTML = resultBattle
-    newAttackPlayer.innerHTML = playerAttackGlobal
-    newAttackPc.innerHTML = pcAttackGlobal
-    sectionMessagePlayer.appendChild(newAttackPlayer)
-    sectionMessagePc.appendChild(newAttackPc)
 }
 
 function selectPlayerPet() {
@@ -263,7 +253,7 @@ function lives(params) {
     if (pcLivesGlobal == 0) {
         createFinalMessage("Felicitaciones, ganaste")
     } else if (playerLivesGlobal == 0) {
-        createFinalMessage("Felicitaciones, ganaste")
+        createFinalMessage("Buen intento, suerte para la próxima")
     }
 }
 
@@ -277,6 +267,16 @@ function createFinalMessage(finalResult) {
 
 function resetGame() {
     location.reload()
+}
+
+function createMessage(resultBattle) {
+    let newAttackPlayer = document.createElement("p")
+    let newAttackPc = document.createElement("p")
+    sectionMessage.innerHTML = resultBattle
+    newAttackPlayer.innerHTML = playerAttackGlobal
+    newAttackPc.innerHTML = pcAttackGlobal
+    sectionMessagePlayer.appendChild(newAttackPlayer)
+    sectionMessagePc.appendChild(newAttackPc)
 }
 
 window.addEventListener("load", playGame)

@@ -22,9 +22,9 @@ body{
     font-size: 60px;
 }
 
-.subtitulos{
+/* .subtitulos{
 
-}
+} */
 
 .tarjeta-de-mokepon{
     width: 180px;
@@ -50,7 +50,7 @@ input{
 }
 
 input:checked + label{
-    background-color: crimson ;
+    background-color: rgb(245, 112, 138) ;
 }
 
 #select-attack{
