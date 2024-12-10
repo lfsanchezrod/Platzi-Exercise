@@ -15,6 +15,8 @@ const contenedorTarjetas = document.getElementById("contenedorTarjetas")
 
 const contenedorAtaques = document.getElementById("contenedorAtaques")
 
+
+//Se declaran las variables desde un inicio por recomendación
 let mokepones = []
 let mokeponPlayerSelect
 let playerAttackGlobal
@@ -44,11 +46,8 @@ class Mokepon {
 
 
 let pikashu = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5)
-
 let paladio = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5)
-
 let nico = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5)
-
 let charchar = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5)
 
 
@@ -124,7 +123,7 @@ function attackFire() {
 
 function attackWater() {
     playerAttackGlobal = "Water"
-   // attackPc()
+    // attackPc()
 }
 
 function attackGround() {

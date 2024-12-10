@@ -5,9 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "file": "g:\\My Drive\\PLATZI\\Curso Gratis de Programación Básica\\Platzi-Exercise\\Platzi-Exercise\\mokepon\\mokepon.html"
+        },
+        {
             "type": "msedge",
             "request": "launch",
-            "name": "Open mokepon.html",
+            "name": "Open Edge",
             "file": "g:\\My Drive\\PLATZI\\Curso Gratis de Programación Básica\\Platzi-Exercise\\Platzi-Exercise\\mokepon\\mokepon.html"
         }
     ]
