@@ -1,35 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Poor+Story&family=Poppins:wght@300&display=swap');
-body{
+
+/* Set a background image for the entire page (usually applied to the <body> element) */
+
+body {
     font-family: 'Poppins', sans-serif;
+    background-image: url("https://wallpaperaccess.com/full/94935.jpg");
+    background-position: top;
+    background-repeat: repeat;
+    background-size: cover;
 }
 
-#select-pet{
+#select-pet {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    Background-color: rgb(255, 255, 255, 0.5);
 }
 
 .title {
-    display: flex; 
+    display: flex;
     flex-direction: column;
     align-items: center;
-    color: crimson;
+    color: rgb(255, 255, 255);
     width: 310px;
     height: 50px;
     font-family: 'Poor Story', cursive;
     font-size: 60px;
+    text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
-.subtitulos{
-
+.subtitulo {
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    font-family: 'Poor Story', cursive;
+    font-size: 60px;
+    text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
-.tarjeta-de-mokepon{
+.tarjeta-de-mokepon {
     width: 180px;
     height: 100px;
-    background: aqua;
+    background: rgb(254, 239, 208);
     padding: 10px;
     margin: 10px;
     box-sizing: border-box;
@@ -37,28 +52,30 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: crimson;
-    font-style:oblique;
+    color: rgb(78, 81, 146);
+    font-style: oblique;
+    border: 2px solid rgb(175, 51, 73);
 }
 
-.tarjeta-de-mokepon img{
+.tarjeta-de-mokepon img {
     width: 80px;
 }
 
-input{
+input {
     display: none;
 }
 
-input:checked + label{
-    background-color: crimson ;
+input:checked+label {
+    background-color: rgb(245, 112, 138);
 }
 
-#select-attack{
+#select-attack {
     flex-direction: column;
     align-items: center;
+    Background-color: rgb(255, 255, 255, 0.5);
 }
 
-.btn-select{
+.btn-select {
     width: 210px;
     height: 50px;
     color: blueviolet;
@@ -69,23 +86,29 @@ input:checked + label{
     margin-top: 30px;
 }
 
-.tarjetas, .tarjetas-ataques{
+.tarjetas,
+.tarjetas-ataques {
     display: flex;
     gap: 10px;
 }
 
-.attacks{
+.attacks {
     display: grid;
     grid-template-columns: 100px 100px;
-    color: salmon;
+    color: rgb(0, 0, 0);
 }
-.player-attack, .pc-attack{
+
+.player-attack,
+.pc-attack {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 @media (max-width:360px) {
-    .tarjetas, .tarjetas-ataques{
+
+    .tarjetas,
+    .tarjetas-ataques {
         display: flex;
         flex-direction: column;
         gap: 10px;
