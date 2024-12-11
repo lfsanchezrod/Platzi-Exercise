@@ -17,23 +17,24 @@ const contenedorAtaques = document.getElementById("contenedorAtaques")
 
 
 //Se declaran las variables desde un inicio por recomendación
-let mokepones = []
-let mokeponPlayerSelect
-let playerAttackGlobal
-let pcAttackGlobal
-let playerLivesGlobal = 3
-let pcLivesGlobal = 3
-let opcionDeMokepones
-let inputPikashu
-let inputPaladio
-let inputNico
-let inputCharchar
-let ataquesMokepon
-let botones = []
-let ataqueJugador = []
-let btnFire
-let btnGround
-let btnWater
+let mokepones = [] //let mokepones = []
+let mokeponPlayerSelect //let mascotaJugador
+let playerAttackGlobal //let ataquesMokepon Revisar duplicidad
+let pcAttackGlobal //let ataquesMokeponEnemigo
+let playerLivesGlobal = 3 //let vidasJugador = 3
+let pcLivesGlobal = 3 //let vidasEnemigo = 3
+let opcionDeMokepones //opcionDeMokepones
+let inputPikashu //let inputHipodoge
+let inputPaladio //let inputCapipepo
+let inputNico //let inputRatigueya
+let inputCharchar //Nuevo Mokepon
+let ataquesMokepon //let ataquesMokepon
+let botones = [] //let botones = []
+let ataqueJugador = [] //let ataqueJugador =[]
+let ataqueEnemigo = [] //let ataqueEnemigo = []
+let btnFire //let botonFuego
+let btnGround //let botonTierra
+let btnWater //let botonAgua
 
 class Mokepon {
     constructor(nombre, foto, vida) {
