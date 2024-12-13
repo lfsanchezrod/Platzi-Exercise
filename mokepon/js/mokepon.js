@@ -36,6 +36,8 @@ let btnFire //let botonFuego
 let btnGround //let botonTierra
 let btnWater  //let botonAgua
 
+// Se crea un nuevo objeto en el cual se van a agregar las caracteristicas de nuestro Mokepon
+
 class Mokepon {
     constructor(nombre, foto, vida) {
         this.nombre = nombre
@@ -248,9 +250,6 @@ function secuenciaAtaques() {
                 ataqueJugador.push("Water")
                 //console.log(ataqueJugador)
                 boton.style.background = "#112f58"
-                for (const button of botones) {
-                    button.disabled = true
-                }
 
             } else {
                 ataqueJugador.push("Ground")
@@ -293,9 +292,9 @@ function lives(params) {
 
 function createFinalMessage(finalResult) {
     sectionMessage.innerHTML = finalResult
-    btnFire.disabled = true
-    btnWater.disabled = true
-    btnGround.disabled = true
+    for (const button of botones) {
+        button.disabled = true
+    }
     sectionReset.style.display = "block"
 }
 
