@@ -20,7 +20,7 @@ const contenedorAtaques = document.getElementById("contenedorAtaques")
 let mokepones = [] //let mokepones = []
 let mokeponPlayerSelect //let mascotaJugador
 let playerAttackGlobal //let ataquesMokepon Revisar duplicidad
-let pcAttackGlobal //let ataquesMokeponEnemigo
+let pcAttackGlobal = [] //let ataquesMokeponEnemigo
 let playerLivesGlobal = 3 //let vidasJugador = 3
 let pcLivesGlobal = 3 //let vidasEnemigo = 3
 let opcionDeMokepones //opcionDeMokepones
@@ -34,7 +34,7 @@ let ataqueJugador = [] //let ataqueJugador =[]
 let ataqueEnemigo = [] //let ataqueEnemigo = []
 let btnFire //let botonFuego
 let btnGround //let botonTierra
-let btnWater //let botonAgua
+let btnWater  //let botonAgua
 
 class Mokepon {
     constructor(nombre, foto, vida) {
@@ -117,26 +117,32 @@ function playGame() {
     btnGnr("btn-reset", resetGame)
 }
 
-function attackFire() {
-    playerAttackGlobal = "Fire"
-    //attackPc()
+function setAttack(attackType) {
+    playerAttackGlobal = attackType
 }
 
-function attackWater() {
-    playerAttackGlobal = "Water"
-    // attackPc()
-}
+// function attackFire() {
+//     playerAttackGlobal = "Fire"
+//     //attackPc()
+// }
 
-function attackGround() {
-    playerAttackGlobal = "Ground"
-    //attackPc()
-}
+// function attackWater() {
+//     playerAttackGlobal = "Water"
+//     // attackPc()
+// }
+
+// function attackGround() {
+//     playerAttackGlobal = "Ground"
+//     //attackPc()
+// }
 
 function attackPc() {
-    let randomAttack = random(0, 2)
-    if (randomAttack == 0) {
+    //console.log(pcAttackGlobal);
+
+    let randomAttack = random(0, pcAttackGlobal.length)
+    if (randomAttack == 0 || randomAttack == 1) {
         pcAttackGlobal = "Fire"
-    } else if (randomAttack == 1) {
+    } else if (randomAttack == 2 || randomAttack == 3) {
         pcAttackGlobal = "Water"
     } else {
         pcAttackGlobal = "Ground"
@@ -199,19 +205,35 @@ function extraerAtaques(mascotaJugador) {
 function mostrarAtaques(ataques) {
     ataques.forEach((ataque) => {
         ataquesMokepon = `
-        <button id=${ataque.id} class="btn-select-attack">${ataque.nombre}</button>
+        <button class="btn-select-attack ${ataque.id}">${ataque.nombre}</button>
         `
         // console.log(mokepon.nombre)
         contenedorAtaques.innerHTML += ataquesMokepon
     })
-    btnWater = document.getElementById("btn-water")
-    btnGround = document.getElementById("btn-ground")
-    btnFire = document.getElementById("btn-fire")
+    btnWater = document.getElementsByClassName("btn-water")
+    btnGround = document.getElementsByClassName("btn-ground")
+    btnFire = document.getElementsByClassName("btn-fire")
     botones = document.querySelectorAll(".btn-select-attack")
 
-    btnWater.addEventListener("click", attackWater)
-    btnGround.addEventListener("click", attackGround)
-    btnFire.addEventListener("click", attackFire)
+    for (const button of btnWater) {
+        button.addEventListener("click", () => setAttack('Water'))
+    }
+    for (const button of btnGround) {
+        button.addEventListener("click", () => setAttack('Ground'))
+
+    } for (const button of btnFire) {
+        button.addEventListener("click", () => setAttack('Fire'))
+
+    }
+    // btnWater.forEach(button => {
+    //     button.addEventListener("click", () => setAttack('Ground'))
+    // });
+
+    // btnWater.forEach((item)=>{
+    //     item.addEventListener("click", () => setAttack('Water'))
+    // }) 
+    // btnGround.addEventListener("click", () => setAttack('Ground'))
+    // btnFire.addEventListener("click", () => setAttack('Fire'))
     secuenciaAtaques()
 }
 
@@ -220,26 +242,38 @@ function secuenciaAtaques() {
         boton.addEventListener('click', (e) => {
             if (e.target.textContent === "🔥") {
                 ataqueJugador.push("Fire")
-                console.log(ataqueJugador)
+                //console.log(ataqueJugador)
                 boton.style.background = "#112f58"
             } else if (e.target.textContent === "💧") {
                 ataqueJugador.push("Water")
-                console.log(ataqueJugador)
+                //console.log(ataqueJugador)
                 boton.style.background = "#112f58"
+                for (const button of botones) {
+                    button.disabled = true
+                }
+
             } else {
                 ataqueJugador.push("Ground")
-                console.log(ataqueJugador)
+                //console.log(ataqueJugador)
                 boton.style.background = "#112f58"
             }
             attackPc()
+            console.log(playerAttackGlobal.length);
+            /*
+        if(playerAttackGlobal.length >= 5){
+            btnFire.disabled = true
+            btnWater.disabled = true
+            btnGround.disabled = true
+        }*/
         })
     })
 }
 
 function selectPcPet() {
     let randomPcPet = random(0, mokepones.length - 1)
-
     spanPetPc.innerHTML = mokepones[randomPcPet].nombre
+    pcAttackGlobal = mokepones[randomPcPet].ataques
+    //console.log(pcAttackGlobal);
 
     sectionAttackSelect.style.display = "flex"
     sectionPetPlayer.style.display = "none"
@@ -275,6 +309,8 @@ function createMessage(resultBattle) {
     sectionMessage.innerHTML = resultBattle
     newAttackPlayer.innerHTML = playerAttackGlobal
     newAttackPc.innerHTML = pcAttackGlobal
+    console.log(playerAttackGlobal);
+
     sectionMessagePlayer.appendChild(newAttackPlayer)
     sectionMessagePc.appendChild(newAttackPc)
 }
