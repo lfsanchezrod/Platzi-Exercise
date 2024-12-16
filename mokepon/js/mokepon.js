@@ -1,3 +1,8 @@
+/*
+Moviendo a Capipepo hacia la derecha
+Clase 62/84 • Curso Gratis de Programación Básica
+*/ 
+
 const sectionAttackSelect = document.getElementById("select-attack")
 const sectionReset = document.getElementById("reset")
 const spanPetAttackPc = document.getElementById("attack-pc")
@@ -16,6 +21,10 @@ const sectionPetPlayer = document.getElementById("select-pet")
 const containerCards = document.getElementById("containerCards")
 
 const containerAttacks = document.getElementById("containerAttacks")
+
+
+const sectionViewMap = document.getElementById("view-map")
+const map = document.getElementById("map")
 
 
 //Se declaran las variables desde un inicio por recomendación
@@ -41,6 +50,8 @@ let enemyVictories = 0
 let playerVictories = 0
 let indexPlayerAttack
 let indexEnemyAttack
+
+let canvas = map.getContext("2d")
 
 // Se crea un nuevo objeto en el cual se van a agregar las caracteristicas de nuestro Mokepon
 
@@ -96,6 +107,8 @@ mokepones.push(pikashu, paladio, nico, charchar)
 
 function playGame() {
     sectionAttackSelect.style.display = "none"
+    sectionViewMap.style.display = "none"
+    //canvas.fillRect(5,15,20,40)
     //sectionReset.style.display = "none"
 
     mokepones.forEach((mokepon) => {
@@ -120,31 +133,45 @@ function playGame() {
 
 function selectPlayerPet() {
 
+    let imgPikashu = new Image()
+
+    imgPikashu.src = pikashu.photo
+    canvas.drawImage(
+        imgPikashu,
+        20,
+        40,
+        100,
+        100
+    )
 
     if (inputPikashu.checked) {
         sectionPetPlayer.style.display = 'none'
-        sectionAttackSelect.style.display = 'flex'
+        //sectionAttackSelect.style.display = 'flex'
+        sectionViewMap.style.display = 'flex'
         spanPetPlayer.innerHTML = inputPikashu.id
         mokeponPlayerSelect = inputPikashu.id
         extractAttacks(mokeponPlayerSelect)
         selectPcPet()
     } else if (inputPaladio.checked) {
         sectionPetPlayer.style.display = 'none'
-        sectionAttackSelect.style.display = 'flex'
+        //sectionAttackSelect.style.display = 'flex'
+        sectionViewMap.style.display = 'flex'
         spanPetPlayer.innerHTML = inputPaladio.id
         mokeponPlayerSelect = inputPaladio.id
         extractAttacks(mokeponPlayerSelect)
         selectPcPet()
     } else if (inputNico.checked) {
         sectionPetPlayer.style.display = 'none'
-        sectionAttackSelect.style.display = 'flex'
+        //sectionAttackSelect.style.display = 'flex'
+        sectionViewMap.style.display = 'flex'
         spanPetPlayer.innerHTML = inputNico.id
         mokeponPlayerSelect = inputNico.id
         extractAttacks(mokeponPlayerSelect)
         selectPcPet()
     } else if (inputCharchar.checked) {
         sectionPetPlayer.style.display = 'none'
-        sectionAttackSelect.style.display = 'flex'
+        //sectionAttackSelect.style.display = 'flex'
+        sectionViewMap.style.display = 'flex'
         spanPetPlayer.innerHTML = inputCharchar.id
         mokeponPlayerSelect = inputCharchar.id
         extractAttacks(mokeponPlayerSelect)
@@ -186,16 +213,19 @@ function attackSequence() {
                 playerAttack.push("Fire")
                 boton.style.background = "#112f58"
                 console.log(playerAttack);
+                boton.disabled = true
                 
             } else if (e.target.textContent === "💧") {
                 playerAttack.push("Water")
                 boton.style.background = "#112f58"
                 console.log(playerAttack);
+                boton.disabled = true
 
             } else {
                 playerAttack.push("Ground")
                 boton.style.background = "#112f58"
                 console.log(playerAttack);
+                boton.disabled = true
             }
             attackPc()
             console.log(playerAttack.length);
@@ -217,7 +247,7 @@ function selectPcPet() {
 function attackPc() {
     console.log(pcAttackGlobal.length);
         let randomAttack = random(0, pcAttackGlobal.length -1)
-        
+        //RETO: OPTIMIZAR EL CODIGO PARA USAR EL ARREGLO pcAttackGlobal
         if (randomAttack == 0 || randomAttack == 1) {
             pcAttack.push('Fire')
         } else if (randomAttack == 2 || randomAttack == 3) {
@@ -298,9 +328,6 @@ function createMessage(resultBattle) {
 function createFinalMessage(finalResult) {
     sectionMessage.innerHTML = finalResult
     
-    for (const button of botones) {
-        button.disabled = true
-    }
     sectionReset.style.display = "block"
 }
 
