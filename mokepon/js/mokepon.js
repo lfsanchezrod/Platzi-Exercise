@@ -1,6 +1,6 @@
 /*
-Moviendo a Capipepo hacia la derecha
-Clase 62/84 • Curso Gratis de Programación Básica
+Movimiento hacia todas las direcciones
+Clase 63/84 • Curso Gratis de Programación Básica
 */ 
 
 const sectionAttackSelect = document.getElementById("select-attack")
@@ -61,6 +61,12 @@ class Mokepon {
         this.photo = photo
         this.life = life
         this.attacks = []
+        this.x = 20
+        this.y = 30
+        this.whidth = 80
+        this.high = 80
+        this.mapPhoto = new Image()
+        this.mapPhoto.src = photo
     }
 }
 
@@ -132,17 +138,20 @@ function playGame() {
 }
 
 function selectPlayerPet() {
-
+/* 
     let imgPikashu = new Image()
 
-    imgPikashu.src = pikashu.photo
-    canvas.drawImage(
-        imgPikashu,
-        20,
-        40,
-        100,
-        100
+    imgPikashu.src = pikashu.photo */
+
+    
+/*     canvas.drawImage(
+        pikashu.mapPhoto,
+        pikashu.x,
+        pikashu.y,
+        pikashu.whidth,
+        pikashu.high
     )
+ */
 
     if (inputPikashu.checked) {
         sectionPetPlayer.style.display = 'none'
@@ -337,6 +346,23 @@ function resetGame() {
 
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function paintCharacter() {
+    canvas.clearRect(0,0,map.width,map.height)
+    canvas.drawImage(
+        pikashu.mapPhoto,
+        pikashu.x,
+        pikashu.y,
+        pikashu.whidth,
+        pikashu.high
+    )
+    //canvas.clearReact(0,0,map.whidth,map.height)
+}
+
+function movePikashu() {
+    pikashu.x = pikashu.x + 5
+    paintCharacter()
 }
 
 window.addEventListener("load", playGame)
