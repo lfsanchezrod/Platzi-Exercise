@@ -41,7 +41,7 @@ body {
     text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
-.tarjeta-de-mokepon {
+.mokepon-card {
     width: 180px;
     height: 100px;
     background: rgb(254, 239, 208);
@@ -57,7 +57,7 @@ body {
     border: 2px solid rgb(175, 51, 73);
 }
 
-.tarjeta-de-mokepon img {
+.mokepon-card img {
     width: 80px;
 }
 
