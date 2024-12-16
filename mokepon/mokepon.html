@@ -21,7 +21,10 @@
         Walk around the map with your mokepon
       </h1>
       <canvas id="map"></canvas>
-      <button onclick="movePikashu()">Move</button>
+      <button onmouseup="stopMove()" onmousedown="moveUp()">Up</button>
+      <button onmouseup="stopMove()" onmousedown="moveLeft()">Left</button>
+      <button onmouseup="stopMove()" onmousedown="moveDown()">Down</button>
+      <button onmouseup="stopMove()" onmousedown="moveRight()">Right</button>
     </section>
 
     <section id="select-attack">

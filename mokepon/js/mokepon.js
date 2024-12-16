@@ -1,6 +1,6 @@
 /*
-Movimiento hacia todas las direcciones
-Clase 63/84 • Curso Gratis de Programación Básica
+Movimientos con el teclado
+Clase 64/84 • Curso Gratis de Programación Básica
 */ 
 
 const sectionAttackSelect = document.getElementById("select-attack")
@@ -52,6 +52,7 @@ let indexPlayerAttack
 let indexEnemyAttack
 
 let canvas = map.getContext("2d")
+let interval
 
 // Se crea un nuevo objeto en el cual se van a agregar las caracteristicas de nuestro Mokepon
 
@@ -67,6 +68,8 @@ class Mokepon {
         this.high = 80
         this.mapPhoto = new Image()
         this.mapPhoto.src = photo
+        this.speedX = 0
+        this.speedY = 0
     }
 }
 
@@ -157,6 +160,7 @@ function selectPlayerPet() {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
         sectionViewMap.style.display = 'flex'
+        interval = setInterval(paintCharacter, 50)
         spanPetPlayer.innerHTML = inputPikashu.id
         mokeponPlayerSelect = inputPikashu.id
         extractAttacks(mokeponPlayerSelect)
@@ -165,6 +169,7 @@ function selectPlayerPet() {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
         sectionViewMap.style.display = 'flex'
+        interval = setInterval(paintCharacter, 50)
         spanPetPlayer.innerHTML = inputPaladio.id
         mokeponPlayerSelect = inputPaladio.id
         extractAttacks(mokeponPlayerSelect)
@@ -173,6 +178,7 @@ function selectPlayerPet() {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
         sectionViewMap.style.display = 'flex'
+        interval = setInterval(paintCharacter, 50)
         spanPetPlayer.innerHTML = inputNico.id
         mokeponPlayerSelect = inputNico.id
         extractAttacks(mokeponPlayerSelect)
@@ -181,6 +187,7 @@ function selectPlayerPet() {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
         sectionViewMap.style.display = 'flex'
+        interval = setInterval(paintCharacter, 50)
         spanPetPlayer.innerHTML = inputCharchar.id
         mokeponPlayerSelect = inputCharchar.id
         extractAttacks(mokeponPlayerSelect)
@@ -266,7 +273,7 @@ function attackPc() {
         }
         console.log(pcAttack)
         startFight()
-    }
+}
 
 function startFight(){
     if (playerAttack.length === 5) {
@@ -278,7 +285,6 @@ function indexBothOpponents(player, enemy) {
     indexPlayerAttack = playerAttack[player]
     indexEnemyAttack = pcAttack[enemy]
 }
-
 
 function battle() {
     for (let index = 0; index < playerAttack.length; index++) {
@@ -349,6 +355,8 @@ function random(min, max) {
 }
 
 function paintCharacter() {
+    pikashu.x = pikashu.x + pikashu.speedX
+    pikashu.y = pikashu.y + pikashu.speedY
     canvas.clearRect(0,0,map.width,map.height)
     canvas.drawImage(
         pikashu.mapPhoto,
@@ -360,9 +368,29 @@ function paintCharacter() {
     //canvas.clearReact(0,0,map.whidth,map.height)
 }
 
-function movePikashu() {
-    pikashu.x = pikashu.x + 5
-    paintCharacter()
+function moveRight() {
+    pikashu.speedX = 5
+    //paintCharacter()
+}
+
+function moveLeft() {
+    pikashu.speedX = -5
+    //paintCharacter()
+}
+
+function moveDown() {
+    pikashu.speedY = 5
+    //paintCharacter()
+}
+
+function moveUp() {
+    pikashu.speedY = -5
+    //paintCharacter()
+}
+
+function stopMove() {
+    pikashu.speedX = 0
+    pikashu.speedY = 0
 }
 
 window.addEventListener("load", playGame)
