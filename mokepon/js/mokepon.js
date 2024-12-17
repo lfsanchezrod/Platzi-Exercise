@@ -1,6 +1,6 @@
 /*
-Imágenes y personajes de fondo
-Clase 65/84 • Curso Gratis de Programación Básica
+Métodos en las clases
+Clase 66/84 • Curso Gratis de Programación Básica
 */
 
 const sectionAttackSelect = document.getElementById("select-attack")
@@ -33,6 +33,7 @@ let mokeponPlayerSelect //let mascotaJugador
 let playerAttackGlobal //let ataquesMokepon Revisar duplicidad
 let pcAttackGlobal// = [] //let ataquesMokeponEnemigo
 let playerLivesGlobal = 3 //let vidasJugador = 3
+let playerPetObject
 let pcLivesGlobal = 3 //let vidasEnemigo = 3
 let optionOfMokepons //opcionDeMokepones
 let inputPikashu //let inputHipodoge
@@ -53,6 +54,8 @@ let indexEnemyAttack
 
 let canvas = map.getContext("2d")
 let interval
+let mapBackground = new Image()
+mapBackground.src = './assets/mokemap.png'
 
 // Se crea un nuevo objeto en el cual se van a agregar las caracteristicas de nuestro Mokepon
 
@@ -159,38 +162,38 @@ function selectPlayerPet() {
     if (inputPikashu.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
-        startMap()
 
-        spanPetPlayer.innerHTML = inputPikashu.id
         mokeponPlayerSelect = inputPikashu.id
         extractAttacks(mokeponPlayerSelect)
+        startMap()
+        spanPetPlayer.innerHTML = inputPikashu.id
         selectPcPet()
     } else if (inputPaladio.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
-        startMap()
 
         spanPetPlayer.innerHTML = inputPaladio.id
         mokeponPlayerSelect = inputPaladio.id
         extractAttacks(mokeponPlayerSelect)
+        startMap()
         selectPcPet()
     } else if (inputNico.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
-        startMap()
 
         spanPetPlayer.innerHTML = inputNico.id
         mokeponPlayerSelect = inputNico.id
         extractAttacks(mokeponPlayerSelect)
+        startMap()
         selectPcPet()
     } else if (inputCharchar.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
-        startMap()
 
         spanPetPlayer.innerHTML = inputCharchar.id
         mokeponPlayerSelect = inputCharchar.id
         extractAttacks(mokeponPlayerSelect)
+        startMap()
         selectPcPet()
     } else {
         alert("Select pet")
@@ -354,43 +357,47 @@ function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function paintCharacter() {
-    pikashu.x = pikashu.x + pikashu.speedX
-    pikashu.y = pikashu.y + pikashu.speedY
+function paintCanvas() {
+    console.log(playerPetObject);
+    
+    playerPetObject.x = playerPetObject.x + playerPetObject.speedX
+    playerPetObject.y = playerPetObject.y + playerPetObject.speedY
     canvas.clearRect(0, 0, map.width, map.height)
+    canvas.drawImage(mapBackground,0,0,map.width,map.height)
     canvas.drawImage(
-        pikashu.mapPhoto,
-        pikashu.x,
-        pikashu.y,
-        pikashu.whidth,
-        pikashu.high
+        playerPetObject.mapPhoto,
+        playerPetObject.x,
+        playerPetObject.y,
+        playerPetObject.whidth,
+        playerPetObject.high
     )
     //canvas.clearReact(0,0,map.whidth,map.height)
 }
 
 function moveRight() {
-    pikashu.speedX = 5
-    //paintCharacter()
+    playerPetObject.speedX = 5
+    //paintCanvas()
 }
 
 function moveLeft() {
-    pikashu.speedX = -5
-    //paintCharacter()
+    playerPetObject.speedX = -5
+    //paintCanvas()
 }
 
 function moveDown() {
-    pikashu.speedY = 5
-    //paintCharacter()
+    playerPetObject.speedY = 5
+    //paintCanvas()
 }
 
 function moveUp() {
-    pikashu.speedY = -5
-    //paintCharacter()
+    playerPetObject.speedY = -5
+    //paintCanvas()
 }
 
 function stopMove() {
-    pikashu.speedX = 0
-    pikashu.speedY = 0
+    const myMokepon = obtainPetObject()
+    playerPetObject.speedX = 0
+    playerPetObject.speedY = 0
 }
 
 function aKeyIsPressed(event) {
@@ -419,13 +426,23 @@ function aKeyIsPressed(event) {
 
 
 function startMap() {
-
-    map.width = 800
-    map.height = 600
+    map.width = 320
+    map.height = 240
+    playerPetObject = obtainPetObject(mokeponPlayerSelect)
+    console.log(playerPetObject, mokeponPlayerSelect);
+    
     sectionViewMap.style.display = 'flex'
-    interval = setInterval(paintCharacter, 50)
+    interval = setInterval(paintCanvas, 50)
     window.addEventListener('keydown', aKeyIsPressed)
     window.addEventListener('keyup', stopMove)
+}
+
+function obtainPetObject() {
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mokeponPlayerSelect === mokepones[i].name) {
+            return mokepones[i]
+        }
+    }
 }
 
 window.addEventListener("load", playGame)
