@@ -1,7 +1,7 @@
 /*
-Movimientos con el teclado
-Clase 64/84 • Curso Gratis de Programación Básica
-*/ 
+Imágenes y personajes de fondo
+Clase 65/84 • Curso Gratis de Programación Básica
+*/
 
 const sectionAttackSelect = document.getElementById("select-attack")
 const sectionReset = document.getElementById("reset")
@@ -141,26 +141,26 @@ function playGame() {
 }
 
 function selectPlayerPet() {
-/* 
-    let imgPikashu = new Image()
-
-    imgPikashu.src = pikashu.photo */
-
+    /* 
+        let imgPikashu = new Image()
     
-/*     canvas.drawImage(
-        pikashu.mapPhoto,
-        pikashu.x,
-        pikashu.y,
-        pikashu.whidth,
-        pikashu.high
-    )
- */
+        imgPikashu.src = pikashu.photo */
+
+
+    /*     canvas.drawImage(
+            pikashu.mapPhoto,
+            pikashu.x,
+            pikashu.y,
+            pikashu.whidth,
+            pikashu.high
+        )
+     */
 
     if (inputPikashu.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
-        sectionViewMap.style.display = 'flex'
-        interval = setInterval(paintCharacter, 50)
+        startMap()
+
         spanPetPlayer.innerHTML = inputPikashu.id
         mokeponPlayerSelect = inputPikashu.id
         extractAttacks(mokeponPlayerSelect)
@@ -168,8 +168,8 @@ function selectPlayerPet() {
     } else if (inputPaladio.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
-        sectionViewMap.style.display = 'flex'
-        interval = setInterval(paintCharacter, 50)
+        startMap()
+
         spanPetPlayer.innerHTML = inputPaladio.id
         mokeponPlayerSelect = inputPaladio.id
         extractAttacks(mokeponPlayerSelect)
@@ -177,8 +177,8 @@ function selectPlayerPet() {
     } else if (inputNico.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
-        sectionViewMap.style.display = 'flex'
-        interval = setInterval(paintCharacter, 50)
+        startMap()
+
         spanPetPlayer.innerHTML = inputNico.id
         mokeponPlayerSelect = inputNico.id
         extractAttacks(mokeponPlayerSelect)
@@ -186,8 +186,8 @@ function selectPlayerPet() {
     } else if (inputCharchar.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
-        sectionViewMap.style.display = 'flex'
-        interval = setInterval(paintCharacter, 50)
+        startMap()
+
         spanPetPlayer.innerHTML = inputCharchar.id
         mokeponPlayerSelect = inputCharchar.id
         extractAttacks(mokeponPlayerSelect)
@@ -230,7 +230,7 @@ function attackSequence() {
                 boton.style.background = "#112f58"
                 console.log(playerAttack);
                 boton.disabled = true
-                
+
             } else if (e.target.textContent === "💧") {
                 playerAttack.push("Water")
                 boton.style.background = "#112f58"
@@ -251,31 +251,31 @@ function attackSequence() {
 
 function selectPcPet() {
     let randomPcPet = random(0, mokepones.length - 1)
-    
+
     spanPetPc.innerHTML = mokepones[randomPcPet].name
     pcAttackGlobal = mokepones[randomPcPet].attacks
     console.log("Es el ataque enemigo = " + pcAttackGlobal);
-    
+
 
     attackSequence()
 }
 
 function attackPc() {
     console.log(pcAttackGlobal.length);
-        let randomAttack = random(0, pcAttackGlobal.length -1)
-        //RETO: OPTIMIZAR EL CODIGO PARA USAR EL ARREGLO pcAttackGlobal
-        if (randomAttack == 0 || randomAttack == 1) {
-            pcAttack.push('Fire')
-        } else if (randomAttack == 2 || randomAttack == 3) {
-            pcAttack.push('Water')
-        } else {
-            pcAttack.push('Ground')
-        }
-        console.log(pcAttack)
-        startFight()
+    let randomAttack = random(0, pcAttackGlobal.length - 1)
+    //RETO: OPTIMIZAR EL CODIGO PARA USAR EL ARREGLO pcAttackGlobal
+    if (randomAttack == 0 || randomAttack == 1) {
+        pcAttack.push('Fire')
+    } else if (randomAttack == 2 || randomAttack == 3) {
+        pcAttack.push('Water')
+    } else {
+        pcAttack.push('Ground')
+    }
+    console.log(pcAttack)
+    startFight()
 }
 
-function startFight(){
+function startFight() {
     if (playerAttack.length === 5) {
         battle()
     }
@@ -288,7 +288,7 @@ function indexBothOpponents(player, enemy) {
 
 function battle() {
     for (let index = 0; index < playerAttack.length; index++) {
-        if(playerAttack[index] === pcAttack[index]) {
+        if (playerAttack[index] === pcAttack[index]) {
             indexBothOpponents(index, index)
             createMessage("TIE")
             //playerVictories++
@@ -298,7 +298,7 @@ function battle() {
             createMessage("WIN")
             playerVictories++
             spanLivesPlayer.innerHTML = playerVictories
-        } else if (playerAttack[index] ==='Water' && pcAttack[index] === 'Fire') {
+        } else if (playerAttack[index] === 'Water' && pcAttack[index] === 'Fire') {
             indexBothOpponents(index, index)
             createMessage("WIN")
             playerVictories++
@@ -319,12 +319,12 @@ function battle() {
     checkLife()
 }
 
-function checkLife(){
-    if(playerVictories === enemyVictories){
+function checkLife() {
+    if (playerVictories === enemyVictories) {
         createFinalMessage("Esto fue un empate")
-    }else if(playerVictories > enemyVictories ){
+    } else if (playerVictories > enemyVictories) {
         createFinalMessage("FELICITACIONES!! Ganaste")
-    }else{
+    } else {
         createFinalMessage("Lo siento, perdiste")
     }
 }
@@ -342,7 +342,7 @@ function createMessage(resultBattle) {
 
 function createFinalMessage(finalResult) {
     sectionMessage.innerHTML = finalResult
-    
+
     sectionReset.style.display = "block"
 }
 
@@ -357,7 +357,7 @@ function random(min, max) {
 function paintCharacter() {
     pikashu.x = pikashu.x + pikashu.speedX
     pikashu.y = pikashu.y + pikashu.speedY
-    canvas.clearRect(0,0,map.width,map.height)
+    canvas.clearRect(0, 0, map.width, map.height)
     canvas.drawImage(
         pikashu.mapPhoto,
         pikashu.x,
@@ -391,6 +391,41 @@ function moveUp() {
 function stopMove() {
     pikashu.speedX = 0
     pikashu.speedY = 0
+}
+
+function aKeyIsPressed(event) {
+    //console.log(event.key);
+    switch (event.key) {
+        case 'ArrowUp':
+            moveUp()
+            break;
+
+        case 'ArrowDown':
+            moveDown()
+            break;
+
+        case 'ArrowLeft':
+            moveLeft()
+            break;
+
+        case 'ArrowRight':
+            moveRight()
+            break;
+
+        default:
+            break;
+    }
+}
+
+
+function startMap() {
+
+    map.width = 800
+    map.height = 600
+    sectionViewMap.style.display = 'flex'
+    interval = setInterval(paintCharacter, 50)
+    window.addEventListener('keydown', aKeyIsPressed)
+    window.addEventListener('keyup', stopMove)
 }
 
 window.addEventListener("load", playGame)
