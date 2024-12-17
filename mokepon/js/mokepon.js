@@ -1,6 +1,6 @@
 /*
-Métodos en las clases
-Clase 66/84 • Curso Gratis de Programación Básica
+Obstáculos y colisiones
+Clase 67/84 • Curso Gratis de Programación Básica
 */
 
 const sectionAttackSelect = document.getElementById("select-attack")
@@ -60,27 +60,42 @@ mapBackground.src = './assets/mokemap.png'
 // Se crea un nuevo objeto en el cual se van a agregar las caracteristicas de nuestro Mokepon
 
 class Mokepon {
-    constructor(name, photo, life) {
+    constructor(name, photo, life, photoMap, x = 10, y = 10) {
         this.name = name
         this.photo = photo
         this.life = life
         this.attacks = []
-        this.x = 20
-        this.y = 30
-        this.whidth = 80
-        this.high = 80
+        this.x = x
+        this.y = y
+        this.whidth = 40
+        this.high = 40
         this.mapPhoto = new Image()
-        this.mapPhoto.src = photo
+        this.mapPhoto.src = photoMap
         this.speedX = 0
         this.speedY = 0
+    }
+
+    paintMokepon() {
+        canvas.drawImage(
+            this.mapPhoto,
+            this.x,
+            this.y,
+            this.whidth,
+            this.high
+        )
     }
 }
 
 
-let pikashu = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5)
-let paladio = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5)
-let nico = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5)
-let charchar = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5)
+let pikashu = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png')
+let paladio = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png')
+let nico = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png')
+let charchar = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png')
+
+let pikashuEnemy = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png', 80, 120)
+let paladioEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png', 150, 95)
+let nicoEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png', 200, 190)
+let charcharEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png', 80, 190)
 
 
 pikashu.attacks.push(
@@ -359,18 +374,18 @@ function random(min, max) {
 
 function paintCanvas() {
     console.log(playerPetObject);
-    
+
     playerPetObject.x = playerPetObject.x + playerPetObject.speedX
     playerPetObject.y = playerPetObject.y + playerPetObject.speedY
     canvas.clearRect(0, 0, map.width, map.height)
-    canvas.drawImage(mapBackground,0,0,map.width,map.height)
-    canvas.drawImage(
-        playerPetObject.mapPhoto,
-        playerPetObject.x,
-        playerPetObject.y,
-        playerPetObject.whidth,
-        playerPetObject.high
-    )
+    canvas.drawImage(mapBackground, 0, 0, map.width, map.height)
+
+
+    playerPetObject.paintMokepon()
+    paladioEnemy.paintMokepon()
+    pikashuEnemy.paintMokepon()
+    charcharEnemy.paintMokepon()
+    nicoEnemy.paintMokepon()
     //canvas.clearReact(0,0,map.whidth,map.height)
 }
 
@@ -430,7 +445,7 @@ function startMap() {
     map.height = 240
     playerPetObject = obtainPetObject(mokeponPlayerSelect)
     console.log(playerPetObject, mokeponPlayerSelect);
-    
+
     sectionViewMap.style.display = 'flex'
     interval = setInterval(paintCanvas, 50)
     window.addEventListener('keydown', aKeyIsPressed)
