@@ -1,55 +1,65 @@
 <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MOKEPON!</title>
-        <link rel="stylesheet" href="./styles.css"/>
-    </head>
-    <body>
-        <section id="select-pet">
-            <h1 id="tlMOKEMON" class="title">MOKEPON!</h1>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MOKEPON!</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <section id="select-pet">
+      <h1 id="tlMOKEMON" class="title">MOKEPON!</h1>
 
-            <h2 class="subtitulo">Choose your pet:</h2>
+      <h2 class="subtitulo">Choose your pet:</h2>
 
-            <div id="containerCards" class="tarjetas">
+      <div id="containerCards" class="tarjetas"></div>
+      <p><button id="btn-pet" class="btn-select">Select</button></p>
+    </section>
 
-            </div>
-            <p><button id="btn-pet" class="btn-select">Select</button></p>
-        </section>
-        <section id="select-attack">
-            <h1 id="tlMOKEMON" class="title">MOKEPON!</h1>
+    <section id="view-map">
+      <h1 id="tlMOKEMON" class="title">
+        Walk around the map with your mokepon
+      </h1>
+      <canvas id="map"></canvas>
+      <button onmouseup="stopMove()" onmousedown="moveUp()">Up</button>
+      <button onmouseup="stopMove()" onmousedown="moveLeft()">Left</button>
+      <button onmouseup="stopMove()" onmousedown="moveDown()">Down</button>
+      <button onmouseup="stopMove()" onmousedown="moveRight()">Right</button>
+    </section>
 
-            <h2>Elige tu ataque:</h2>
+    <section id="select-attack">
+      <h1 id="tlMOKEMON" class="title">MOKEPON!</h1>
 
-            <div id="containerAttacks" class="card-attacks">
-                <!-- <button id="btn-fire" class="btn-select">Fire🔥</button>
+      <h2>Elige tu ataque:</h2>
+
+      <div id="containerAttacks" class="card-attacks">
+        <!-- <button id="btn-fire" class="btn-select">Fire🔥</button>
                 <button id="btn-water" class="btn-select">Water💦</button>
                 <button id="btn-ground" class="btn-select">Ground🪨</button> -->
-            </div>
+      </div>
 
-            <div>
-                <section id="messages">
-                    <p id="message"></p>
-                </section>
-
-                <section id="reset">
-                    <p><button id="btn-reset" class="btn-select">Reset</button></p>
-                </section>
-            </div>
-            <div class="attacks">
-                <div class="player-attack">
-                    <p id="player-live">0</p>
-                    <p id="pet-player"></p>
-                    <div id="message-attack-player"></div>
-                </div>
-                <div class="pc-attack">
-                    <p id="pc-live">0</p>
-                    <p id="pet-pc"></p>
-                    <div id="message-attack-pc"></div>
-                </div>
-             </div>
+      <div>
+        <section id="messages">
+          <p id="message"></p>
         </section>
-        <script src="./js/mokepon.js"></script>
-    </body>
+
+        <section id="reset">
+          <p><button id="btn-reset" class="btn-select">Reset</button></p>
+        </section>
+      </div>
+      <div class="attacks">
+        <div class="player-attack">
+          <p id="player-live">0</p>
+          <p id="pet-player"></p>
+          <div id="message-attack-player"></div>
+        </div>
+        <div class="pc-attack">
+          <p id="pc-live">0</p>
+          <p id="pet-pc"></p>
+          <div id="message-attack-pc"></div>
+        </div>
+      </div>
+    </section>
+    <script src="./js/mokepon.js"></script>
+  </body>
 </html>

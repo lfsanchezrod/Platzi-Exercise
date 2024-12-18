@@ -106,3 +106,7 @@ function lives(params) {
     // }) 
     // btnGround.addEventListener("click", () => setAttack('Ground'))
     // btnFire.addEventListener("click", () => setAttack('Fire'))
+
+    for (const button of botones) {
+        button.disabled = true
+    }
