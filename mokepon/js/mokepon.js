@@ -1,3 +1,8 @@
+/*
+Obstáculos y colisiones
+Clase 67/84 • Curso Gratis de Programación Básica
+*/
+
 const sectionAttackSelect = document.getElementById("select-attack")
 const sectionReset = document.getElementById("reset")
 const spanPetAttackPc = document.getElementById("attack-pc")
@@ -6,277 +11,453 @@ const spanLivesEnenemy = document.getElementById("pc-live")
 const sectionMessage = document.getElementById("message")
 const sectionMessagePlayer = document.getElementById("message-attack-player")
 const sectionMessagePc = document.getElementById("message-attack-pc")
+const buttonPlayerPet = document.getElementById('btn-pet')
+const buttonReset = document.getElementById('btn-reset')
 
 const spanPetPlayer = document.getElementById("pet-player")
 const spanPetPc = document.getElementById("pet-pc")
 
 const sectionPetPlayer = document.getElementById("select-pet")
-const contenedorTarjetas=document.getElementById("contenedorTarjetas")
+const containerCards = document.getElementById("containerCards")
 
-const contenedorAtaques=document.getElementById("contenedorAtaques")
+const containerAttacks = document.getElementById("containerAttacks")
 
-let mokepones = []
-let mokeponPlayerSelect
-let playerAttackGlobal
-let pcAttackGlobal
-let playerLivesGlobal = 3
-let pcLivesGlobal = 3
-let opcionDeMokepones
-let inputPitochu
-let inputPaladio
-let inputNico
-let inputCharchar
-let ataquesMokepon
-let botones=[]
-let ataqueJugador=[]
-let btnFire
-let btnGround
-let btnWater
 
-class Mokepon{
-    constructor(nombre, foto,vida) {
-        this.nombre = nombre
-        this.foto = foto
-        this.vida = vida
-        this.ataques =[]
+const sectionViewMap = document.getElementById("view-map")
+const map = document.getElementById("map")
+
+
+//Se declaran las variables desde un inicio por recomendación
+let mokepones = [] //let mokepones = []
+let mokeponPlayerSelect //let mascotaJugador
+let playerAttackGlobal //let ataquesMokepon Revisar duplicidad
+let pcAttackGlobal// = [] //let ataquesMokeponEnemigo
+let playerLivesGlobal = 3 //let vidasJugador = 3
+let playerPetObject
+let pcLivesGlobal = 3 //let vidasEnemigo = 3
+let optionOfMokepons //opcionDeMokepones
+let inputPikashu //let inputHipodoge
+let inputPaladio //let inputCapipepo
+let inputNico //let inputRatigueya
+let inputCharchar //Nuevo Mokepon
+let attacksMokepon //let attacksMokepon
+let botones = [] //let botones = []
+let playerAttack = [] //let ataqueJugador =[]
+let pcAttack = [] //let ataqueEnemigo = []
+let btnFire //let botonFuego
+let btnGround //let botonTierra
+let btnWater  //let botonAgua
+let enemyVictories = 0
+let playerVictories = 0
+let indexPlayerAttack
+let indexEnemyAttack
+
+let canvas = map.getContext("2d")
+let interval
+let mapBackground = new Image()
+mapBackground.src = './assets/mokemap.png'
+
+// Se crea un nuevo objeto en el cual se van a agregar las caracteristicas de nuestro Mokepon
+
+class Mokepon {
+    constructor(name, photo, life, photoMap, x = 10, y = 10) {
+        this.name = name
+        this.photo = photo
+        this.life = life
+        this.attacks = []
+        this.x = x
+        this.y = y
+        this.whidth = 40
+        this.high = 40
+        this.mapPhoto = new Image()
+        this.mapPhoto.src = photoMap
+        this.speedX = 0
+        this.speedY = 0
+    }
+
+    paintMokepon() {
+        canvas.drawImage(
+            this.mapPhoto,
+            this.x,
+            this.y,
+            this.whidth,
+            this.high
+        )
     }
 }
 
 
-let pitochu = new Mokepon("Pitochu","./assets/mokepons_mokepon_capipepo_attack.png",5)
+let pikashu = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png')
+let paladio = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png')
+let nico = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png')
+let charchar = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png')
 
-let paladio = new Mokepon("Paladio","./assets/mokepons_mokepon_hipodoge_attack.png",5)
+let pikashuEnemy = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png', 80, 120)
+let paladioEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png', 150, 95)
+let nicoEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png', 200, 190)
+let charcharEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png', 80, 190)
 
-let nico = new Mokepon("Nico","./assets/mokepons_mokepon_ratigueya_attack.png",5)
 
-let charchar = new Mokepon("Charchar","./assets/mokepons_mokepon_charchar_attack.png" ,5)
-
-
-pitochu.ataques.push(
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'🔥',id:'btn-fire'}
+pikashu.attacks.push(
+    { name: '💧', id: 'btn-water' },
+    { name: '💧', id: 'btn-water' },
+    { name: '💧', id: 'btn-water' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '🔥', id: 'btn-fire' }
 )
 
-paladio.ataques.push(
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'🔥',id:'btn-fire'}
+paladio.attacks.push(
+    { name: '🪨', id: 'btn-ground' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '💧', id: 'btn-water' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '🔥', id: 'btn-fire' }
 )
 
-nico.ataques.push(
-    {nombre:'🔥',id:'btn-fire'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'🪨',id:'btn-ground'},
-    {nombre:'🔥',id:'btn-fire'}
+nico.attacks.push(
+    { name: '🔥', id: 'btn-fire' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '💧', id: 'btn-water' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '🔥', id: 'btn-fire' }
 )
 
-charchar.ataques.push(
-    {nombre:'🔥',id:'btn-fire'},
-    {nombre:'🔥',id:'btn-fire'},
-    {nombre:'💧',id:'btn-water'},
-    {nombre:'🪨',id:'btn-water'},
-    {nombre:'🔥',id:'btn-fire'}
+charchar.attacks.push(
+    { name: '🔥', id: 'btn-fire' },
+    { name: '🔥', id: 'btn-fire' },
+    { name: '💧', id: 'btn-water' },
+    { name: '🪨', id: 'btn-water' },
+    { name: '🔥', id: 'btn-fire' }
 )
 
-mokepones.push(pitochu,paladio,nico,charchar)
-
-function btnGnr(element,funcionespecial) {
-    let btnGeneral=document.getElementById(element)
-    btnGeneral.addEventListener("click",funcionespecial) 
-}
+mokepones.push(pikashu, paladio, nico, charchar)
 
 function playGame() {
-   sectionAttackSelect.style.display = "none"
-   sectionReset.style.display = "none"
+    sectionAttackSelect.style.display = "none"
+    sectionViewMap.style.display = "none"
+    //canvas.fillRect(5,15,20,40)
+    //sectionReset.style.display = "none"
 
     mokepones.forEach((mokepon) => {
-        opcionDeMokepones = `
-        <input type="radio" name="pet" id=${mokepon.nombre} />
-        <label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
-            <p>${mokepon.nombre}</p>
-            <img src=${mokepon.foto} alt=${mokepon.nombre}/>
+        optionOfMokepons = `
+        <input type="radio" name="pet" id=${mokepon.name} />
+        <label class="mokepon-card" for=${mokepon.name}>
+            <p>${mokepon.name}</p>
+            <img src=${mokepon.photo} alt=${mokepon.name}/>
         </label>
         `
-        contenedorTarjetas.innerHTML += opcionDeMokepones
+        containerCards.innerHTML += optionOfMokepons
     })
 
-
-    inputPitochu = document.getElementById("Pitochu")
+    inputPikashu = document.getElementById("Pikashu")
     inputPaladio = document.getElementById("Paladio")
     inputNico = document.getElementById("Nico")
     inputCharchar = document.getElementById("Charchar")
-    
 
-   btnGnr("btn-pet",selectPlayerPet)
-   btnGnr("btn-reset",resetGame)
+    buttonPlayerPet.addEventListener('click', selectPlayerPet)
+    buttonReset.addEventListener('click', resetGame)
 }
 
-// function attackFire() {
-//     playerAttackGlobal = "Fire"
-//     attackPc()
-// }
+function selectPlayerPet() {
+    /* 
+        let imgPikashu = new Image()
+    
+        imgPikashu.src = pikashu.photo */
 
-// function attackWater() {
-//     playerAttackGlobal = "Water"
-//     attackPc()
-// }
 
-// function attackGround() {
-//     playerAttackGlobal = "Ground"
-//     attackPc()
-// }
+    /*     canvas.drawImage(
+            pikashu.mapPhoto,
+            pikashu.x,
+            pikashu.y,
+            pikashu.whidth,
+            pikashu.high
+        )
+     */
+
+    if (inputPikashu.checked) {
+        sectionPetPlayer.style.display = 'none'
+        //sectionAttackSelect.style.display = 'flex'
+
+        mokeponPlayerSelect = inputPikashu.id
+        extractAttacks(mokeponPlayerSelect)
+        startMap()
+        spanPetPlayer.innerHTML = inputPikashu.id
+        selectPcPet()
+    } else if (inputPaladio.checked) {
+        sectionPetPlayer.style.display = 'none'
+        //sectionAttackSelect.style.display = 'flex'
+
+        spanPetPlayer.innerHTML = inputPaladio.id
+        mokeponPlayerSelect = inputPaladio.id
+        extractAttacks(mokeponPlayerSelect)
+        startMap()
+        selectPcPet()
+    } else if (inputNico.checked) {
+        sectionPetPlayer.style.display = 'none'
+        //sectionAttackSelect.style.display = 'flex'
+
+        spanPetPlayer.innerHTML = inputNico.id
+        mokeponPlayerSelect = inputNico.id
+        extractAttacks(mokeponPlayerSelect)
+        startMap()
+        selectPcPet()
+    } else if (inputCharchar.checked) {
+        sectionPetPlayer.style.display = 'none'
+        //sectionAttackSelect.style.display = 'flex'
+
+        spanPetPlayer.innerHTML = inputCharchar.id
+        mokeponPlayerSelect = inputCharchar.id
+        extractAttacks(mokeponPlayerSelect)
+        startMap()
+        selectPcPet()
+    } else {
+        alert("Select pet")
+    }
+}
+
+function extractAttacks(petPlayer) {
+    let attacks
+    for (let i = 0; i < mokepones.length; i++) {
+        if (petPlayer === mokepones[i].name) {
+            attacks = mokepones[i].attacks
+        }
+
+    }
+    showAttacks(attacks)
+}
+
+function showAttacks(attacks) {
+    attacks.forEach((ataque) => {
+        attacksMokepon = `
+        <button class="btn-select-attack ${ataque.id}">${ataque.name}</button>
+        `
+        containerAttacks.innerHTML += attacksMokepon
+    })
+
+    btnWater = document.getElementsByClassName("btn-water")
+    btnGround = document.getElementsByClassName("btn-ground")
+    btnFire = document.getElementsByClassName("btn-fire")
+    botones = document.querySelectorAll(".btn-select-attack")
+}
+
+function attackSequence() {
+    botones.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+            if (e.target.textContent === "🔥") {
+                playerAttack.push("Fire")
+                boton.style.background = "#112f58"
+                console.log(playerAttack);
+                boton.disabled = true
+
+            } else if (e.target.textContent === "💧") {
+                playerAttack.push("Water")
+                boton.style.background = "#112f58"
+                console.log(playerAttack);
+                boton.disabled = true
+
+            } else {
+                playerAttack.push("Ground")
+                boton.style.background = "#112f58"
+                console.log(playerAttack);
+                boton.disabled = true
+            }
+            attackPc()
+            console.log(playerAttack.length);
+        })
+    })
+}
+
+function selectPcPet() {
+    let randomPcPet = random(0, mokepones.length - 1)
+
+    spanPetPc.innerHTML = mokepones[randomPcPet].name
+    pcAttackGlobal = mokepones[randomPcPet].attacks
+    console.log("Es el ataque enemigo = " + pcAttackGlobal);
+
+
+    attackSequence()
+}
 
 function attackPc() {
-    let randomAttack = random(0,2)
-    if (randomAttack == 0) {
-        pcAttackGlobal = "Fire"
-    } else if (randomAttack == 1) {
-        pcAttackGlobal = "Water"
+    console.log(pcAttackGlobal.length);
+    let randomAttack = random(0, pcAttackGlobal.length - 1)
+    //RETO: OPTIMIZAR EL CODIGO PARA USAR EL ARREGLO pcAttackGlobal
+    if (randomAttack == 0 || randomAttack == 1) {
+        pcAttack.push('Fire')
+    } else if (randomAttack == 2 || randomAttack == 3) {
+        pcAttack.push('Water')
     } else {
-        pcAttackGlobal = "Ground"
+        pcAttack.push('Ground')
     }
-    battle()
+    console.log(pcAttack)
+    startFight()
+}
+
+function startFight() {
+    if (playerAttack.length === 5) {
+        battle()
+    }
+}
+
+function indexBothOpponents(player, enemy) {
+    indexPlayerAttack = playerAttack[player]
+    indexEnemyAttack = pcAttack[enemy]
 }
 
 function battle() {
-    if (playerAttackGlobal == pcAttackGlobal) {
+    for (let index = 0; index < playerAttack.length; index++) {
+        if (playerAttack[index] === pcAttack[index]) {
+            indexBothOpponents(index, index)
             createMessage("TIE")
-       } else if ((playerAttackGlobal == "Fire" && pcAttackGlobal == "Ground")||(playerAttackGlobal == "Water" && pcAttackGlobal == "Fire") || (playerAttackGlobal == "Ground" && pcAttackGlobal == "Water")) {
-            createMessage("You win")
-            pcLivesGlobal --
-            spanLivesEnenemy.innerHTML = pcLivesGlobal
+            //playerVictories++
+            spanLivesPlayer.innerHTML = playerVictories
+        } else if (playerAttack[index] === 'Fire' && pcAttack[index] === 'Ground') {
+            indexBothOpponents(index, index)
+            createMessage("WIN")
+            playerVictories++
+            spanLivesPlayer.innerHTML = playerVictories
+        } else if (playerAttack[index] === 'Water' && pcAttack[index] === 'Fire') {
+            indexBothOpponents(index, index)
+            createMessage("WIN")
+            playerVictories++
+            spanLivesPlayer.innerHTML = playerVictories
+        } else if (playerAttack[index] === 'Ground' && pcAttack[index] === 'Water') {
+            indexBothOpponents(index, index)
+            createMessage("WIN")
+            playerVictories++
+            spanLivesPlayer.innerHTML = playerVictories
         } else {
-            createMessage("You lose")
-            playerLivesGlobal --
-            spanLivesPlayer.innerHTML = playerLivesGlobal
+            indexBothOpponents(index, index)
+            createMessage("LOSE")
+            enemyVictories++
+            spanLivesEnenemy.innerHTML = enemyVictories
         }
-    lives()
+    }
+
+    checkLife()
+}
+
+function checkLife() {
+    if (playerVictories === enemyVictories) {
+        createFinalMessage("Esto fue un empate")
+    } else if (playerVictories > enemyVictories) {
+        createFinalMessage("FELICITACIONES!! Ganaste")
+    } else {
+        createFinalMessage("Lo siento, perdiste")
+    }
 }
 
 function createMessage(resultBattle) {
     let newAttackPlayer = document.createElement("p")
     let newAttackPc = document.createElement("p")
     sectionMessage.innerHTML = resultBattle
-    newAttackPlayer.innerHTML = playerAttackGlobal
-    newAttackPc.innerHTML = pcAttackGlobal
+    newAttackPlayer.innerHTML = indexPlayerAttack
+    newAttackPc.innerHTML = indexEnemyAttack
+
     sectionMessagePlayer.appendChild(newAttackPlayer)
     sectionMessagePc.appendChild(newAttackPc)
 }
 
-function selectPlayerPet() {
-   if (inputPitochu.checked) {
-        spanPetPlayer.innerHTML = inputPitochu.id
-        mokeponPlayerSelect = inputPitochu.id
-        selectPcPet()
-    //    alert("You Select a Pitochu")
-    } else if (inputPaladio.checked) {
-        spanPetPlayer.innerHTML = inputPaladio.id
-        mokeponPlayerSelect = inputPaladio.id
-        selectPcPet()
-    //    alert("You Select a Paladio")
-    } else if (inputNico.checked) {
-        spanPetPlayer.innerHTML = inputNico.id
-        mokeponPlayerSelect = inputNico.id
-        selectPcPet()
-    //    alert("You Select a Nico")
-    } else if (inputCharchar.checked) {
-        spanPetPlayer.innerHTML = inputCharchar.id
-        mokeponPlayerSelect = inputCharchar.id
-        selectPcPet()
-    //    alert("You Select Charchar")
-    } else {
-    //    alert("Select pet")
-    }
-    extraerAtaques(mokeponPlayerSelect)
-}
-
-function extraerAtaques(mascotaJugador) {
-    let ataques
-    for (let i = 0; i < mokepones.length; i++) {
-        if (mascotaJugador===mokepones[i].nombre) {
-            ataques = mokepones[i].ataques
-        }
-        
-    }
-    mostrarAtaques(ataques)
-}
- function mostrarAtaques(ataques) {
-    ataques.forEach((ataque) => {
-        ataquesMokepon = `
-        <button id=${ataque.id} class="btn-select-attack">${ataque.nombre}</button>
-        `
-       // console.log(mokepon.nombre)
-       contenedorAtaques.innerHTML += ataquesMokepon
-    })
-    btnWater=document.getElementById("btn-water")
-    btnGround=document.getElementById("btn-ground")
-    btnFire=document.getElementById("btn-fire")
-    botones=document.querySelectorAll(".btn-select-attack")
-
-    // btnWater.addEventListener("click",attackWater)
-    // btnGround.addEventListener("click",attackGround)
-    // btnFire.addEventListener("click",attackFire)
-    secuenciaAtaques()
- }
-
- function secuenciaAtaques(){
-    botones.forEach((boton)=>{
-        boton.addEventListener('click', (e) => {
-            if (e.target.textContent === "🔥") {
-                ataqueJugador.push("Fire")
-                console.log(ataqueJugador)
-                boton.style.background = "#112f58"
-            }else if (e.target.textContent === "💧") {
-                ataqueJugador.push("Water")
-                console.log(ataqueJugador)
-                boton.style.background = "#112f58"
-            } else{
-                ataqueJugador.push("Ground")
-                console.log(ataqueJugador)
-                boton.style.background = "#112f58"
-            }
-            attackPc()
-        })
-    })
- }
-
-function selectPcPet() {
-    let randomPcPet = random(0,mokepones.length-1)
-
-    spanPetPc.innerHTML = mokepones[randomPcPet].nombre
-
-   sectionAttackSelect.style.display = "flex"
-   sectionPetPlayer.style.display = "none"
-}
-
-function random(min,max){
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-function lives(params) {
-    if (pcLivesGlobal == 0) {
-        createFinalMessage("Felicitaciones, ganaste")
-    } else if (playerLivesGlobal == 0) {
-        createFinalMessage("Felicitaciones, ganaste")
-    }
-}
-
 function createFinalMessage(finalResult) {
     sectionMessage.innerHTML = finalResult
-    btnFire.disabled = true
-    btnWater.disabled = true
-    btnGround.disabled = true
-   sectionReset.style.display = "block"
+
+    sectionReset.style.display = "block"
 }
 
 function resetGame() {
     location.reload()
+}
+
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function paintCanvas() {
+    console.log(playerPetObject);
+
+    playerPetObject.x = playerPetObject.x + playerPetObject.speedX
+    playerPetObject.y = playerPetObject.y + playerPetObject.speedY
+    canvas.clearRect(0, 0, map.width, map.height)
+    canvas.drawImage(mapBackground, 0, 0, map.width, map.height)
+
+
+    playerPetObject.paintMokepon()
+    paladioEnemy.paintMokepon()
+    pikashuEnemy.paintMokepon()
+    charcharEnemy.paintMokepon()
+    nicoEnemy.paintMokepon()
+    //canvas.clearReact(0,0,map.whidth,map.height)
+}
+
+function moveRight() {
+    playerPetObject.speedX = 5
+    //paintCanvas()
+}
+
+function moveLeft() {
+    playerPetObject.speedX = -5
+    //paintCanvas()
+}
+
+function moveDown() {
+    playerPetObject.speedY = 5
+    //paintCanvas()
+}
+
+function moveUp() {
+    playerPetObject.speedY = -5
+    //paintCanvas()
+}
+
+function stopMove() {
+    const myMokepon = obtainPetObject()
+    playerPetObject.speedX = 0
+    playerPetObject.speedY = 0
+}
+
+function aKeyIsPressed(event) {
+    //console.log(event.key);
+    switch (event.key) {
+        case 'ArrowUp':
+            moveUp()
+            break;
+
+        case 'ArrowDown':
+            moveDown()
+            break;
+
+        case 'ArrowLeft':
+            moveLeft()
+            break;
+
+        case 'ArrowRight':
+            moveRight()
+            break;
+
+        default:
+            break;
+    }
+}
+
+
+function startMap() {
+    map.width = 320
+    map.height = 240
+    playerPetObject = obtainPetObject(mokeponPlayerSelect)
+    console.log(playerPetObject, mokeponPlayerSelect);
+
+    sectionViewMap.style.display = 'flex'
+    interval = setInterval(paintCanvas, 50)
+    window.addEventListener('keydown', aKeyIsPressed)
+    window.addEventListener('keyup', stopMove)
+}
+
+function obtainPetObject() {
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mokeponPlayerSelect === mokepones[i].name) {
+            return mokepones[i]
+        }
+    }
 }
 
 window.addEventListener("load", playGame)
