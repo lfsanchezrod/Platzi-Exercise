@@ -57,6 +57,14 @@ let interval
 let mapBackground = new Image()
 mapBackground.src = './assets/mokemap.png'
 
+let heightWeSeek
+let mapWidth = window.innerWidth - 20
+
+heightWeSeek = mapWidth * 600 / 800
+
+map.width = mapWidth
+map.height = heightWeSeek
+
 // Se crea un nuevo objeto en el cual se van a agregar las caracteristicas de nuestro Mokepon
 
 class Mokepon {
@@ -65,7 +73,7 @@ class Mokepon {
         this.photo = photo
         this.life = life
         this.attacks = []
-        this.x = x
+        this.x = random(0, 320)
         this.y = y
         this.whidth = 40
         this.high = 40
@@ -478,8 +486,8 @@ function aKeyIsPressed(event) {
 
 
 function startMap() {
-    map.width = 320
-    map.height = 240
+/*     map.width = 320
+    map.height = 240 */
     playerPetObject = obtainPetObject(mokeponPlayerSelect)
     console.log(playerPetObject, mokeponPlayerSelect);
 

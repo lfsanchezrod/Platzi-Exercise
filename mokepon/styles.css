@@ -134,7 +134,3 @@ input:checked+label {
     align-items: center;
     justify-content: center;
 }
-
-#map {
-    border: 2px solid white;    
-}
