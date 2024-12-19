@@ -1,6 +1,6 @@
 /*
-Botones bonitos y viewport
-Clase 70/84 • Curso Gratis de Programación Básica
+¿Qué es backend?
+Clase 71/84 • Curso Gratis de Programación Básica
 */
 
 const sectionAttackSelect = document.getElementById("select-attack")
