@@ -1,6 +1,6 @@
 /*
-Mapa responsive
-Clase 69/84 • Curso Gratis de Programación Básica
+Botones bonitos y viewport
+Clase 70/84 • Curso Gratis de Programación Básica
 */
 
 const sectionAttackSelect = document.getElementById("select-attack")
@@ -59,6 +59,11 @@ mapBackground.src = './assets/mokemap.png'
 
 let heightWeSeek
 let mapWidth = window.innerWidth - 20
+const maximumMapWidth = 350
+
+if (mapWidth > maximumMapWidth) {
+    mapWidth = maximumMapWidth - 20
+}
 
 heightWeSeek = mapWidth * 600 / 800
 
@@ -68,15 +73,15 @@ map.height = heightWeSeek
 // Se crea un nuevo objeto en el cual se van a agregar las caracteristicas de nuestro Mokepon
 
 class Mokepon {
-    constructor(name, photo, life, photoMap, x = 10, y = 10) {
+    constructor(name, photo, life, photoMap) {
         this.name = name
         this.photo = photo
         this.life = life
         this.attacks = []
-        this.x = random(0, 320)
-        this.y = y
         this.whidth = 40
         this.high = 40
+        this.x = random(0, map.width - this.whidth)
+        this.y = random(0, map.height - this.high)
         this.mapPhoto = new Image()
         this.mapPhoto.src = photoMap
         this.speedX = 0
@@ -100,10 +105,10 @@ let paladio = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.
 let nico = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png')
 let charchar = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png')
 
-let pikashuEnemy = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png', 80, 120)
-let paladioEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png', 150, 95)
-let nicoEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png', 200, 190)
-let charcharEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png', 80, 190)
+let pikashuEnemy = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png')
+let paladioEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png')
+let nicoEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png')
+let charcharEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png')
 
 
 pikashu.attacks.push(
