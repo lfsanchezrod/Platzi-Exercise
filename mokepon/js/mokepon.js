@@ -1,6 +1,6 @@
 /*
-Combate entre mokepones colisionados
-Clase 68/84 • Curso Gratis de Programación Básica
+Mapa responsive
+Clase 69/84 • Curso Gratis de Programación Básica
 */
 
 const sectionAttackSelect = document.getElementById("select-attack")
@@ -106,7 +106,23 @@ pikashu.attacks.push(
     { name: '🔥', id: 'btn-fire' }
 )
 
+pikashuEnemy.attacks.push(
+    { name: '💧', id: 'btn-water' },
+    { name: '💧', id: 'btn-water' },
+    { name: '💧', id: 'btn-water' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '🔥', id: 'btn-fire' }
+)
+
 paladio.attacks.push(
+    { name: '🪨', id: 'btn-ground' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '💧', id: 'btn-water' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '🔥', id: 'btn-fire' }
+)
+
+paladioEnemy.attacks.push(
     { name: '🪨', id: 'btn-ground' },
     { name: '🪨', id: 'btn-ground' },
     { name: '💧', id: 'btn-water' },
@@ -122,7 +138,23 @@ nico.attacks.push(
     { name: '🔥', id: 'btn-fire' }
 )
 
+nicoEnemy.attacks.push(
+    { name: '🔥', id: 'btn-fire' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '💧', id: 'btn-water' },
+    { name: '🪨', id: 'btn-ground' },
+    { name: '🔥', id: 'btn-fire' }
+)
+
 charchar.attacks.push(
+    { name: '🔥', id: 'btn-fire' },
+    { name: '🔥', id: 'btn-fire' },
+    { name: '💧', id: 'btn-water' },
+    { name: '🪨', id: 'btn-water' },
+    { name: '🔥', id: 'btn-fire' }
+)
+
+charcharEnemy.attacks.push(
     { name: '🔥', id: 'btn-fire' },
     { name: '🔥', id: 'btn-fire' },
     { name: '💧', id: 'btn-water' },
@@ -261,24 +293,24 @@ function attackSequence() {
                 boton.disabled = true
             }
             attackPc()
-            console.log(playerAttack.length);
+            console.log("Número de ataques enemigos: " + playerAttack.length);
         })
     })
 }
 
-function selectPcPet() {
-    let randomPcPet = random(0, mokepones.length - 1)
+function selectPcPet(enemy) {
+    //let randomPcPet = random(0, mokepones.length - 1)
 
-    spanPetPc.innerHTML = mokepones[randomPcPet].name
-    pcAttackGlobal = mokepones[randomPcPet].attacks
-    console.log("Es el ataque enemigo = " + pcAttackGlobal);
+    spanPetPc.innerHTML = enemy.name
+    pcAttackGlobal = enemy.attacks
+    //console.log("Es el ataque enemigo = " + pcAttackGlobal);
 
-
+    //clearInterval(paintCanvas)
     attackSequence()
 }
 
 function attackPc() {
-    console.log(pcAttackGlobal.length);
+    //console.log(pcAttackGlobal.length);
     let randomAttack = random(0, pcAttackGlobal.length - 1)
     //RETO: OPTIMIZAR EL CODIGO PARA USAR EL ARREGLO pcAttackGlobal
     if (randomAttack == 0 || randomAttack == 1) {
@@ -288,7 +320,7 @@ function attackPc() {
     } else {
         pcAttack.push('Ground')
     }
-    console.log(pcAttack)
+    console.log("Esté es el ataque enemigo: " + pcAttack)
     startFight()
 }
 
@@ -372,7 +404,7 @@ function random(min, max) {
 }
 
 function paintCanvas() {
-    console.log(playerPetObject);
+    //console.log(playerPetObject);
 
     playerPetObject.x = playerPetObject.x + playerPetObject.speedX
     playerPetObject.y = playerPetObject.y + playerPetObject.speedY
@@ -465,7 +497,7 @@ function obtainPetObject() {
     }
 }
 
-function checkCCollision(enemy) {
+function checkCollision(enemy) {
     const upEnemy = enemy.y
     const downEnemy = enemy.y + enemy.high
     const rightEnemy = enemy.x + enemy.whidth
@@ -484,7 +516,10 @@ function checkCCollision(enemy) {
     ) {
         return
     }
+    console.log("Colisión");
+    
     stopMove()
+    clearInterval(interval)
     sectionAttackSelect.style.display = 'flex'
     sectionViewMap.style.display = 'none'
     selectPcPet(enemy)
