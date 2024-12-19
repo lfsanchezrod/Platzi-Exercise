@@ -1,6 +1,6 @@
 /*
-Obstáculos y colisiones
-Clase 67/84 • Curso Gratis de Programación Básica
+Combate entre mokepones colisionados
+Clase 68/84 • Curso Gratis de Programación Básica
 */
 
 const sectionAttackSelect = document.getElementById("select-attack")
@@ -182,7 +182,6 @@ function selectPlayerPet() {
         extractAttacks(mokeponPlayerSelect)
         startMap()
         spanPetPlayer.innerHTML = inputPikashu.id
-        selectPcPet()
     } else if (inputPaladio.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
@@ -191,7 +190,7 @@ function selectPlayerPet() {
         mokeponPlayerSelect = inputPaladio.id
         extractAttacks(mokeponPlayerSelect)
         startMap()
-        selectPcPet()
+       
     } else if (inputNico.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
@@ -200,7 +199,7 @@ function selectPlayerPet() {
         mokeponPlayerSelect = inputNico.id
         extractAttacks(mokeponPlayerSelect)
         startMap()
-        selectPcPet()
+       
     } else if (inputCharchar.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
@@ -209,7 +208,7 @@ function selectPlayerPet() {
         mokeponPlayerSelect = inputCharchar.id
         extractAttacks(mokeponPlayerSelect)
         startMap()
-        selectPcPet()
+       
     } else {
         alert("Select pet")
     }
@@ -387,6 +386,12 @@ function paintCanvas() {
     charcharEnemy.paintMokepon()
     nicoEnemy.paintMokepon()
     //canvas.clearReact(0,0,map.whidth,map.height)
+    if (playerPetObject.speedX !== 0 || playerPetObject.speedY !== 0) {
+        checkCollision(pikashuEnemy)
+        checkCollision(paladioEnemy)
+        checkCollision(charcharEnemy)
+        checkCollision(nicoEnemy)
+    }
 }
 
 function moveRight() {
@@ -458,6 +463,31 @@ function obtainPetObject() {
             return mokepones[i]
         }
     }
+}
+
+function checkCCollision(enemy) {
+    const upEnemy = enemy.y
+    const downEnemy = enemy.y + enemy.high
+    const rightEnemy = enemy.x + enemy.whidth
+    const leftEnemy = enemy.x
+
+    const upPet =
+        playerPetObject.y
+    const downPet =
+        playerPetObject.y + playerPetObject.high
+    const rightPet =
+        playerPetObject.x + playerPetObject.whidth
+    const leftPet =
+        playerPetObject.x
+
+    if (downPet < upEnemy || upPet > downEnemy || rightPet < leftEnemy || leftPet > rightEnemy
+    ) {
+        return
+    }
+    stopMove()
+    sectionAttackSelect.style.display = 'flex'
+    sectionViewMap.style.display = 'none'
+    selectPcPet(enemy)
 }
 
 window.addEventListener("load", playGame)
