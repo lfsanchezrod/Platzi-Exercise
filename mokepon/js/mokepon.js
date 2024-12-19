@@ -1,6 +1,6 @@
 /*
-¿Qué es backend?
-Clase 71/84 • Curso Gratis de Programación Básica
+Instalación de Node.js y NPM
+Clase 72/84 • Curso Gratis de Programación Básica
 */
 
 const sectionAttackSelect = document.getElementById("select-attack")
