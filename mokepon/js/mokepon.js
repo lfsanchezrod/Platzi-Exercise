@@ -1,8 +1,3 @@
-/*
-Servidor web con Express.js
-Clase 74/84 • Curso Gratis de Programación Básica
-*/
-
 const sectionAttackSelect = document.getElementById("select-attack")
 const sectionReset = document.getElementById("reset")
 const spanPetAttackPc = document.getElementById("attack-pc")
