@@ -1,6 +1,6 @@
 /*
-Instalación de Node.js y NPM
-Clase 72/84 • Curso Gratis de Programación Básica
+Terminal de comandos y Node.js
+Clase 73/84 • Curso Gratis de Programación Básica
 */
 
 const sectionAttackSelect = document.getElementById("select-attack")
