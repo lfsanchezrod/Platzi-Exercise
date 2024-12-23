@@ -26,6 +26,7 @@ const map = document.getElementById("map")
 
 let playerId = null
 let mokepones = [] //let mokepones = []
+let mokeponesEnemies = [] //let mokeponesEnemigos = []
 let mokeponPlayerSelect //let mascotaJugador
 let playerAttackGlobal //let ataquesMokepon Revisar duplicidad
 let pcAttackGlobal// = [] //let ataquesMokeponEnemigo
@@ -421,6 +422,10 @@ function paintCanvas() {
 
     sendPosition(playerPetObject.x, playerPetObject.y)
 
+    mokeponesEnemies.forEach(function (mokepon) {
+        mokepon.paintMokepon()
+    })
+
     /*paladioEnemy.paintMokepon()
     pikashuEnemy.paintMokepon()
     charcharEnemy.paintMokepon()
@@ -451,7 +456,7 @@ function sendPosition(x, y) {
                     .then(function ({ enemies }) {
                         console.log(enemies);
 
-                        enemies.forEach(function (enemy) {
+                        mokeponesEnemies = enemies.map(function (enemy) {
                             let mokeponEnemy = null
                             const mokeponName = enemy.mokepon.name || ''
                             if (mokeponName === 'Pikashu') {
@@ -466,7 +471,7 @@ function sendPosition(x, y) {
 
                             mokeponEnemy.x = enemy.x
                             mokeponEnemy.y = enemy.y
-                            mokeponEnemy.paintMokepon()
+                            return mokeponEnemy                            
                         })
                     })
             }
