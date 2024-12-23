@@ -107,70 +107,53 @@ let paladioEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_at
 let nicoEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png')
 let charcharEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png')
 
-
-pikashu.attacks.push(
+const PIKASHU_ATTACKS = [
     { name: '💧', id: 'btn-water' },
     { name: '💧', id: 'btn-water' },
     { name: '💧', id: 'btn-water' },
     { name: '🪨', id: 'btn-ground' },
     { name: '🔥', id: 'btn-fire' }
-)
+]
 
-pikashuEnemy.attacks.push(
-    { name: '💧', id: 'btn-water' },
-    { name: '💧', id: 'btn-water' },
-    { name: '💧', id: 'btn-water' },
-    { name: '🪨', id: 'btn-ground' },
-    { name: '🔥', id: 'btn-fire' }
-)
+pikashu.attacks.push(...PIKASHU_ATTACKS)
 
-paladio.attacks.push(
+pikashuEnemy.attacks.push(...PIKASHU_ATTACKS)
+
+const PALADIO_ATTACKS = [
     { name: '🪨', id: 'btn-ground' },
     { name: '🪨', id: 'btn-ground' },
     { name: '💧', id: 'btn-water' },
     { name: '🪨', id: 'btn-ground' },
     { name: '🔥', id: 'btn-fire' }
-)
+]
 
-paladioEnemy.attacks.push(
-    { name: '🪨', id: 'btn-ground' },
-    { name: '🪨', id: 'btn-ground' },
-    { name: '💧', id: 'btn-water' },
-    { name: '🪨', id: 'btn-ground' },
-    { name: '🔥', id: 'btn-fire' }
-)
+paladio.attacks.push(...PALADIO_ATTACKS)
 
-nico.attacks.push(
+paladioEnemy.attacks.push(...PALADIO_ATTACKS)
+
+const NICO_ATTACKS = [
     { name: '🔥', id: 'btn-fire' },
     { name: '🪨', id: 'btn-ground' },
     { name: '💧', id: 'btn-water' },
     { name: '🪨', id: 'btn-ground' },
     { name: '🔥', id: 'btn-fire' }
-)
+]
 
-nicoEnemy.attacks.push(
-    { name: '🔥', id: 'btn-fire' },
-    { name: '🪨', id: 'btn-ground' },
-    { name: '💧', id: 'btn-water' },
-    { name: '🪨', id: 'btn-ground' },
-    { name: '🔥', id: 'btn-fire' }
-)
+nico.attacks.push(...NICO_ATTACKS)
 
-charchar.attacks.push(
+nicoEnemy.attacks.push(...NICO_ATTACKS)
+
+const CHARCHAR_ATTACKS = [
     { name: '🔥', id: 'btn-fire' },
     { name: '🔥', id: 'btn-fire' },
     { name: '💧', id: 'btn-water' },
     { name: '🪨', id: 'btn-water' },
     { name: '🔥', id: 'btn-fire' }
-)
+]
 
-charcharEnemy.attacks.push(
-    { name: '🔥', id: 'btn-fire' },
-    { name: '🔥', id: 'btn-fire' },
-    { name: '💧', id: 'btn-water' },
-    { name: '🪨', id: 'btn-water' },
-    { name: '🔥', id: 'btn-fire' }
-)
+charchar.attacks.push(...CHARCHAR_ATTACKS)
+
+charcharEnemy.attacks.push(...CHARCHAR_ATTACKS)
 
 mokepones.push(pikashu, paladio, nico, charchar)
 
