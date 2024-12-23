@@ -70,7 +70,8 @@ map.height = heightWeSeek
 // Se crea un nuevo objeto en el cual se van a agregar las caracteristicas de nuestro Mokepon
 
 class Mokepon {
-    constructor(name, photo, life, photoMap) {
+    constructor(name, photo, life, photoMap, id = null) {
+        this.id = id
         this.name = name
         this.photo = photo
         this.life = life
@@ -102,11 +103,6 @@ let paladio = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.
 let nico = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png')
 let charchar = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png')
 
-let pikashuEnemy = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png')
-let paladioEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png')
-let nicoEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png')
-let charcharEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png')
-
 const PIKASHU_ATTACKS = [
     { name: '💧', id: 'btn-water' },
     { name: '💧', id: 'btn-water' },
@@ -116,8 +112,6 @@ const PIKASHU_ATTACKS = [
 ]
 
 pikashu.attacks.push(...PIKASHU_ATTACKS)
-
-pikashuEnemy.attacks.push(...PIKASHU_ATTACKS)
 
 const PALADIO_ATTACKS = [
     { name: '🪨', id: 'btn-ground' },
@@ -129,8 +123,6 @@ const PALADIO_ATTACKS = [
 
 paladio.attacks.push(...PALADIO_ATTACKS)
 
-paladioEnemy.attacks.push(...PALADIO_ATTACKS)
-
 const NICO_ATTACKS = [
     { name: '🔥', id: 'btn-fire' },
     { name: '🪨', id: 'btn-ground' },
@@ -141,8 +133,6 @@ const NICO_ATTACKS = [
 
 nico.attacks.push(...NICO_ATTACKS)
 
-nicoEnemy.attacks.push(...NICO_ATTACKS)
-
 const CHARCHAR_ATTACKS = [
     { name: '🔥', id: 'btn-fire' },
     { name: '🔥', id: 'btn-fire' },
@@ -152,8 +142,6 @@ const CHARCHAR_ATTACKS = [
 ]
 
 charchar.attacks.push(...CHARCHAR_ATTACKS)
-
-charcharEnemy.attacks.push(...CHARCHAR_ATTACKS)
 
 mokepones.push(pikashu, paladio, nico, charchar)
 
@@ -433,7 +421,7 @@ function paintCanvas() {
 
     sendPosition(playerPetObject.x, playerPetObject.y)
 
-    paladioEnemy.paintMokepon()
+    /*paladioEnemy.paintMokepon()
     pikashuEnemy.paintMokepon()
     charcharEnemy.paintMokepon()
     nicoEnemy.paintMokepon()
@@ -443,7 +431,7 @@ function paintCanvas() {
         checkCollision(paladioEnemy)
         checkCollision(charcharEnemy)
         checkCollision(nicoEnemy)
-    }
+    }*/
 }
 
 function sendPosition(x, y) {
@@ -462,6 +450,24 @@ function sendPosition(x, y) {
                 res.json()
                     .then(function ({ enemies }) {
                         console.log(enemies);
+
+                        enemies.forEach(function (enemy) {
+                            let mokeponEnemy = null
+                            const mokeponName = enemy.mokepon.name || ''
+                            if (mokeponName === 'Pikashu') {
+                                mokeponEnemy = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png')
+                            } else if (mokeponName === 'Paladio') {
+                                mokeponEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png')
+                            } else if (mokeponName === 'Nico') {
+                                mokeponEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png')
+                            } else if (mokeponName === 'Charchar') {
+                                mokeponEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png')
+                            }
+
+                            mokeponEnemy.x = enemy.x
+                            mokeponEnemy.y = enemy.y
+                            mokeponEnemy.paintMokepon()
+                        })
                     })
             }
         })
