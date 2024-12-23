@@ -24,7 +24,7 @@ class Player {
 }
 
 class Mokepon {
-    constructor(name){
+    constructor(name) {
         this.name = name;
     }
 }
@@ -46,29 +46,35 @@ app.post("/mokepon/:playerId", (req, res) => {
     const mokepon = new Mokepon(mokeponName);
 
     const playerIndex = players.findIndex((player) => playerID === player.id)
-    
+
     if (playerIndex >= 0) {
         players[playerIndex].assignMokepon(mokepon);
     }
-    
-    console.log(players);
-    console.log(playerID);
+
+    //console.log(players);
+    //console.log(playerID);
     res.end();
 })
 
 app.post("/mokepon/:playerId/position", (req, res) => {
     const playerID = req.params.playerId || '';
 
-    const x =req.body.x || 0;
-    const y =req.body.y || 0;
-    
+    const x = req.body.x || 0;
+    const y = req.body.y || 0;
+
     const playerIndex = players.findIndex((player) => playerID === player.id)
-    
+
+    //console.log(playerIndex);
+
     if (playerIndex >= 0) {
         players[playerIndex].updatePosition(x, y);
     }
 
-    res.end();
+    const enemies = players.filter((player) => player.id !== playerID);
+
+    res.send({
+        enemies
+    });
 })
 
 app.listen(8080, () => {

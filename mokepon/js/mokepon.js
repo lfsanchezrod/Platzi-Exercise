@@ -331,7 +331,7 @@ function attackSequence() {
                 boton.disabled = true
             }
             attackPc()
-            console.log("Número de ataques enemigos: " + playerAttack.length);
+            //console.log("Número de ataques enemigos: " + playerAttack.length);
         })
     })
 }
@@ -341,14 +341,12 @@ function selectPcPet(enemy) {
 
     spanPetPc.innerHTML = enemy.name
     pcAttackGlobal = enemy.attacks
-    //console.log("Es el ataque enemigo = " + pcAttackGlobal);
 
     //clearInterval(paintCanvas)
     attackSequence()
 }
 
 function attackPc() {
-    //console.log(pcAttackGlobal.length);
     let randomAttack = random(0, pcAttackGlobal.length - 1)
     //RETO: OPTIMIZAR EL CODIGO PARA USAR EL ARREGLO pcAttackGlobal
     if (randomAttack == 0 || randomAttack == 1) {
@@ -358,7 +356,7 @@ function attackPc() {
     } else {
         pcAttack.push('Ground')
     }
-    console.log("Esté es el ataque enemigo: " + pcAttack)
+    //console.log("Esté es el ataque enemigo: " + pcAttack)
     startFight()
 }
 
@@ -442,7 +440,6 @@ function random(min, max) {
 }
 
 function paintCanvas() {
-    //console.log(playerPetObject);
 
     playerPetObject.x = playerPetObject.x + playerPetObject.speedX
     playerPetObject.y = playerPetObject.y + playerPetObject.speedY
@@ -451,7 +448,7 @@ function paintCanvas() {
 
     playerPetObject.paintMokepon()
 
-    sentPosition(playerPetObject.x, playerPetObject.y)
+    sendPosition(playerPetObject.x, playerPetObject.y)
 
     paladioEnemy.paintMokepon()
     pikashuEnemy.paintMokepon()
@@ -466,7 +463,7 @@ function paintCanvas() {
     }
 }
 
-function sentPosition(x, y){
+function sendPosition(x, y) {
     fetch(`http://localhost:8080/mokepon/${playerId}/position`, {
         method: 'POST',
         headers: {
@@ -477,6 +474,15 @@ function sentPosition(x, y){
             y
         })
     })
+        .then(function (res) {
+            if (res.ok) {
+                res.json()
+                    .then(function ({ enemies }) {
+                        console.log(enemies);
+                    })
+            }
+        })
+
 }
 
 function moveRight() {
@@ -506,7 +512,6 @@ function stopMove() {
 }
 
 function aKeyIsPressed(event) {
-    //console.log(event.key);
     switch (event.key) {
         case 'ArrowUp':
             moveUp()
@@ -534,7 +539,7 @@ function startMap() {
     /*     map.width = 320
         map.height = 240 */
     playerPetObject = obtainPetObject(mokeponPlayerSelect)
-    console.log(playerPetObject, mokeponPlayerSelect);
+    //console.log(playerPetObject, mokeponPlayerSelect);
 
     sectionViewMap.style.display = 'flex'
     interval = setInterval(paintCanvas, 50)
