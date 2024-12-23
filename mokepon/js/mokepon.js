@@ -449,8 +449,10 @@ function paintCanvas() {
     canvas.clearRect(0, 0, map.width, map.height)
     canvas.drawImage(mapBackground, 0, 0, map.width, map.height)
 
-
     playerPetObject.paintMokepon()
+
+    sentPosition(playerPetObject.x, playerPetObject.y)
+
     paladioEnemy.paintMokepon()
     pikashuEnemy.paintMokepon()
     charcharEnemy.paintMokepon()
@@ -462,6 +464,19 @@ function paintCanvas() {
         checkCollision(charcharEnemy)
         checkCollision(nicoEnemy)
     }
+}
+
+function sentPosition(x, y){
+    fetch(`http://localhost:8080/mokepon/${playerId}/position`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            x,
+            y
+        })
+    })
 }
 
 function moveRight() {
