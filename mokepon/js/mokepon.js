@@ -196,6 +196,20 @@ function playGame() {
 
     buttonPlayerPet.addEventListener('click', selectPlayerPet)
     buttonReset.addEventListener('click', resetGame)
+
+    joinTheGame()
+}
+
+function joinTheGame() {
+    fetch('http://localhost:8080/join')
+        .then(function (res) {
+            if (res.ok) {
+                res.text()
+                .then(function (response) {
+                    console.log(response);
+                })
+            }
+        })
 }
 
 function selectPlayerPet() {
@@ -230,7 +244,7 @@ function selectPlayerPet() {
         mokeponPlayerSelect = inputPaladio.id
         extractAttacks(mokeponPlayerSelect)
         startMap()
-       
+
     } else if (inputNico.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
@@ -239,7 +253,7 @@ function selectPlayerPet() {
         mokeponPlayerSelect = inputNico.id
         extractAttacks(mokeponPlayerSelect)
         startMap()
-       
+
     } else if (inputCharchar.checked) {
         sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
@@ -248,7 +262,7 @@ function selectPlayerPet() {
         mokeponPlayerSelect = inputCharchar.id
         extractAttacks(mokeponPlayerSelect)
         startMap()
-       
+
     } else {
         alert("Select pet")
     }
@@ -486,8 +500,8 @@ function aKeyIsPressed(event) {
 
 
 function startMap() {
-/*     map.width = 320
-    map.height = 240 */
+    /*     map.width = 320
+        map.height = 240 */
     playerPetObject = obtainPetObject(mokeponPlayerSelect)
     console.log(playerPetObject, mokeponPlayerSelect);
 
@@ -525,7 +539,7 @@ function checkCollision(enemy) {
         return
     }
     console.log("Colisión");
-    
+
     stopMove()
     clearInterval(interval)
     sectionAttackSelect.style.display = 'flex'
