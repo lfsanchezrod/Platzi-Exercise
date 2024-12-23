@@ -23,6 +23,8 @@ const map = document.getElementById("map")
 
 
 //Se declaran las variables desde un inicio por recomendación
+
+let playerId = null
 let mokepones = [] //let mokepones = []
 let mokeponPlayerSelect //let mascotaJugador
 let playerAttackGlobal //let ataquesMokepon Revisar duplicidad
@@ -205,9 +207,10 @@ function joinTheGame() {
         .then(function (res) {
             if (res.ok) {
                 res.text()
-                .then(function (response) {
-                    console.log(response);
-                })
+                    .then(function (response) {
+                        console.log(response);
+                        playerId = response
+                    })
             }
         })
 }
@@ -266,6 +269,19 @@ function selectPlayerPet() {
     } else {
         alert("Select pet")
     }
+    selectMokepon(mokeponPlayerSelect)
+}
+
+function selectMokepon(mokeponPlayerSelect) {
+    fetch(`http://localhost:8080/mokepon/${playerId}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            mokepon: mokeponPlayerSelect
+        })
+    })
 }
 
 function extractAttacks(petPlayer) {
