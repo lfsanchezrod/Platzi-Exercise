@@ -25,6 +25,7 @@ const map = document.getElementById("map")
 //Se declaran las variables desde un inicio por recomendación
 
 let playerId = null
+let enemyId = null
 let mokepones = [] //let mokepones = []
 let mokeponesEnemies = [] //let mokeponesEnemigos = []
 let mokeponPlayerSelect //let mascotaJugador
@@ -302,10 +303,34 @@ function attackSequence() {
                 console.log(playerAttack);
                 boton.disabled = true
             }
-            attackPc()
+            if (playerAttack.length === 5) {
+                sendAttacks()
+            }
+            //attackPc()
             //console.log("Número de ataques enemigos: " + playerAttack.length);
         })
     })
+}
+
+function sendAttacks() {
+    fetch(`http://localhost:8080/mokepon/${playerId}/attacks`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            attacks: playerAttack
+        })
+    })
+        .then(function (res) {
+            if (res.ok) {
+                res.json()
+                    .then(function ({ enemy }) {
+                        console.log(enemy);
+                        selectPcPet(enemy)
+                    })
+            }
+        })
 }
 
 function selectPcPet(enemy) {
@@ -424,6 +449,7 @@ function paintCanvas() {
 
     mokeponesEnemies.forEach(function (mokepon) {
         mokepon.paintMokepon()
+        checkCollision(mokepon)
     })
 
     /*paladioEnemy.paintMokepon()
@@ -460,15 +486,14 @@ function sendPosition(x, y) {
                             let mokeponEnemy = null
                             const mokeponName = enemy.mokepon.name || ''
                             if (mokeponName === 'Pikashu') {
-                                mokeponEnemy = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png')
+                                mokeponEnemy = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png',enemy.id)
                             } else if (mokeponName === 'Paladio') {
-                                mokeponEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png')
+                                mokeponEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png',enemy.id)
                             } else if (mokeponName === 'Nico') {
-                                mokeponEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png')
+                                mokeponEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png',enemy.id)
                             } else if (mokeponName === 'Charchar') {
-                                mokeponEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png')
+                                mokeponEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png',enemy.id)
                             }
-
                             mokeponEnemy.x = enemy.x
                             mokeponEnemy.y = enemy.y
                             return mokeponEnemy                            
@@ -569,6 +594,8 @@ function checkCollision(enemy) {
         return
     }
     console.log("Colisión");
+
+    enemyId = enemy.id
 
     stopMove()
     clearInterval(interval)

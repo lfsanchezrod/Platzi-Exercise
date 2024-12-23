@@ -21,6 +21,10 @@ class Player {
         this.x = x;
         this.y = y;
     }
+
+    assignAttacks(attacks) {
+        this.attacks = attacks;
+    }
 }
 
 class Mokepon {
@@ -68,6 +72,28 @@ app.post("/mokepon/:playerId/position", (req, res) => {
 
     if (playerIndex >= 0) {
         players[playerIndex].updatePosition(x, y);
+    }
+
+    const enemies = players.filter((player) => player.id !== playerID);
+
+    res.send({
+        enemies
+    });
+})
+
+app.post("/mokepon/:playerId/attacks", (req, res) => {
+    const playerID = req.params.playerId || '';
+    const attacks = req.body.attacks || [];
+
+    const x = req.body.x || 0;
+    const y = req.body.y || 0;
+
+    const playerIndex = players.findIndex((player) => playerID === player.id)
+
+    //console.log(playerIndex);
+
+    if (playerIndex >= 0) {
+        players[playerIndex].assignAttacks(attacks);
     }
 
     const enemies = players.filter((player) => player.id !== playerID);
