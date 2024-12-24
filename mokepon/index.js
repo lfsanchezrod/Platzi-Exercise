@@ -96,11 +96,13 @@ app.post("/mokepon/:playerId/attacks", (req, res) => {
         players[playerIndex].assignAttacks(attacks);
     }
 
-    const enemies = players.filter((player) => player.id !== playerID);
+    res.end();
+
+/*     const enemies = players.filter((player) => player.id !== playerID);
 
     res.send({
         enemies
-    });
+    }); */
 })
 
 app.listen(8080, () => {

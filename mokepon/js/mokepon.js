@@ -322,7 +322,7 @@ function sendAttacks() {
             attacks: playerAttack
         })
     })
-        .then(function (res) {
+/*         .then(function (res) {
             if (res.ok) {
                 res.json()
                     .then(function ({ enemy }) {
@@ -330,7 +330,7 @@ function sendAttacks() {
                         selectPcPet(enemy)
                     })
             }
-        })
+        }) */
 }
 
 function selectPcPet(enemy) {
