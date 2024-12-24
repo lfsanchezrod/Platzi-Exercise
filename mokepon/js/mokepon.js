@@ -481,8 +481,30 @@ function sendPosition(x, y) {
                 res.json()
                     .then(function ({ enemies }) {
                         console.log(enemies);
-
-                        mokeponesEnemies = enemies.map(function (enemy) {
+                        mokeponesEnemies = enemies.map(function (enemy) 
+                        {
+                            let mokeponEnemy = null
+                            if(enemy.mokepon != undefined)
+                            {
+                                const mokeponName = enemy.mokepon.name
+                                switch (mokeponName) {
+                                    case 'Pikashu':
+                                        mokeponEnemy = new Mokepon("Pikashu", "./assets/mokepons_mokepon_capipepo_attack.png", 5, './assets/capipepo.png', enemy.id)
+                                        break;
+                                    case 'Paladio':
+                                        mokeponEnemy = new Mokepon("Paladio", "./assets/mokepons_mokepon_hipodoge_attack.png", 5, './assets/hipodoge.png', enemy.id)
+                                        break;
+                                    case 'Nico':
+                                        mokeponEnemy = new Mokepon("Nico", "./assets/mokepons_mokepon_ratigueya_attack.png", 5, './assets/ratigueya.png', enemy.id)
+                                        break;
+                                    case 'Charchar':
+                                        mokeponEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png', enemy.id)
+                                        break;
+                                }
+                                mokeponEnemy.x = enemy.x
+                                mokeponEnemy.y = enemy.y
+                            }
+                            /*
                             let mokeponEnemy = null
                             const mokeponName = enemy.mokepon.name || ''
                             if (mokeponName === 'Pikashu') {
@@ -495,7 +517,7 @@ function sendPosition(x, y) {
                                 mokeponEnemy = new Mokepon("Charchar", "./assets/mokepons_mokepon_charchar_attack.png", 5, './assets/charchar.png',enemy.id)
                             }
                             mokeponEnemy.x = enemy.x
-                            mokeponEnemy.y = enemy.y
+                            mokeponEnemy.y = enemy.y*/
                             return mokeponEnemy                            
                         })
                     })
