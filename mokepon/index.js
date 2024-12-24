@@ -105,6 +105,15 @@ app.post("/mokepon/:playerId/attacks", (req, res) => {
     }); */
 })
 
+app.get("/mokepon/:playerId/attacks", (req, res) => {
+    const playerID = req.params.playerId || '';
+    const player = players.find((player) => player.id === playerID);
+
+    res.send({
+        attacks: player.attacks || []
+    });
+})
+
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
 })

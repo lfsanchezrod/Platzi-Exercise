@@ -322,15 +322,32 @@ function sendAttacks() {
             attacks: playerAttack
         })
     })
-/*         .then(function (res) {
+
+    interval = setInterval(obtainAttacks, 50)
+    /*         .then(function (res) {
+                if (res.ok) {
+                    res.json()
+                        .then(function ({ enemy }) {
+                            console.log(enemy);
+                            selectPcPet(enemy)
+                        })
+                }
+            }) */
+}
+
+function obtainAttacks() {
+    fetch(`http://localhost:8080/mokepon/${enemyId}/attacks`)
+        .then(function (res) {
             if (res.ok) {
                 res.json()
-                    .then(function ({ enemy }) {
-                        console.log(enemy);
-                        selectPcPet(enemy)
+                    .then(function ({ attacks }) {
+                        if (attacks.length === 5) {
+                            pcAttack = attacks
+                            battle()
+                        }
                     })
             }
-        }) */
+        })
 }
 
 function selectPcPet(enemy) {
@@ -369,6 +386,8 @@ function indexBothOpponents(player, enemy) {
 }
 
 function battle() {
+    clearInterval(interval)
+
     for (let index = 0; index < playerAttack.length; index++) {
         if (playerAttack[index] === pcAttack[index]) {
             indexBothOpponents(index, index)
@@ -447,10 +466,15 @@ function paintCanvas() {
 
     sendPosition(playerPetObject.x, playerPetObject.y)
 
-    mokeponesEnemies.forEach(function (mokepon) {
-        mokepon.paintMokepon()
-        checkCollision(mokepon)
-    })
+    if (mokeponesEnemies !== undefined) {
+        mokeponesEnemies.forEach(function (mokepon) {
+            if (mokepon !== null && mokepon !== undefined) {
+                mokepon.paintMokepon()
+                checkCollision(mokepon)
+            }
+        })
+    }
+    
 
     /*paladioEnemy.paintMokepon()
     pikashuEnemy.paintMokepon()
@@ -481,11 +505,9 @@ function sendPosition(x, y) {
                 res.json()
                     .then(function ({ enemies }) {
                         console.log(enemies);
-                        mokeponesEnemies = enemies.map(function (enemy) 
-                        {
+                        mokeponesEnemies = enemies.map(function (enemy) {
                             let mokeponEnemy = null
-                            if(enemy.mokepon != undefined)
-                            {
+                            if (enemy.mokepon != undefined) {
                                 const mokeponName = enemy.mokepon.name
                                 switch (mokeponName) {
                                     case 'Pikashu':
@@ -518,7 +540,7 @@ function sendPosition(x, y) {
                             }
                             mokeponEnemy.x = enemy.x
                             mokeponEnemy.y = enemy.y*/
-                            return mokeponEnemy                            
+                            return mokeponEnemy
                         })
                     })
             }
