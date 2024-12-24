@@ -176,7 +176,7 @@ function playGame() {
 }
 
 function joinTheGame() {
-    fetch('http://localhost:8080/join')
+    fetch('http://192.168.10.114:8080/join')
         .then(function (res) {
             if (res.ok) {
                 res.text()
@@ -205,48 +205,49 @@ function selectPlayerPet() {
      */
 
     if (inputPikashu.checked) {
-        sectionPetPlayer.style.display = 'none'
+/*         sectionPetPlayer.style.display = 'none' */
         //sectionAttackSelect.style.display = 'flex'
 
         mokeponPlayerSelect = inputPikashu.id
-        extractAttacks(mokeponPlayerSelect)
-        startMap()
+/*         extractAttacks(mokeponPlayerSelect)
+        startMap() */
         spanPetPlayer.innerHTML = inputPikashu.id
     } else if (inputPaladio.checked) {
-        sectionPetPlayer.style.display = 'none'
+/*         sectionPetPlayer.style.display = 'none' */
         //sectionAttackSelect.style.display = 'flex'
 
         spanPetPlayer.innerHTML = inputPaladio.id
         mokeponPlayerSelect = inputPaladio.id
-        extractAttacks(mokeponPlayerSelect)
-        startMap()
+/*         extractAttacks(mokeponPlayerSelect)
+        startMap() */
 
     } else if (inputNico.checked) {
-        sectionPetPlayer.style.display = 'none'
+/*         sectionPetPlayer.style.display = 'none' */
         //sectionAttackSelect.style.display = 'flex'
 
         spanPetPlayer.innerHTML = inputNico.id
         mokeponPlayerSelect = inputNico.id
-        extractAttacks(mokeponPlayerSelect)
-        startMap()
+/*         extractAttacks(mokeponPlayerSelect)
+        startMap() */
 
     } else if (inputCharchar.checked) {
-        sectionPetPlayer.style.display = 'none'
         //sectionAttackSelect.style.display = 'flex'
 
         spanPetPlayer.innerHTML = inputCharchar.id
         mokeponPlayerSelect = inputCharchar.id
-        extractAttacks(mokeponPlayerSelect)
-        startMap()
 
     } else {
         alert("Select pet")
+        return
     }
+    extractAttacks(mokeponPlayerSelect)
+    sectionPetPlayer.style.display = 'none'
     selectMokepon(mokeponPlayerSelect)
+    startMap()
 }
 
 function selectMokepon(mokeponPlayerSelect) {
-    fetch(`http://localhost:8080/mokepon/${playerId}`, {
+    fetch(`http://192.168.10.114:8080/mokepon/${playerId}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -313,7 +314,7 @@ function attackSequence() {
 }
 
 function sendAttacks() {
-    fetch(`http://localhost:8080/mokepon/${playerId}/attacks`, {
+    fetch(`http://192.168.10.114:8080/mokepon/${playerId}/attacks`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -336,7 +337,7 @@ function sendAttacks() {
 }
 
 function obtainAttacks() {
-    fetch(`http://localhost:8080/mokepon/${enemyId}/attacks`)
+    fetch(`http://192.168.10.114:8080/mokepon/${enemyId}/attacks`)
         .then(function (res) {
             if (res.ok) {
                 res.json()
@@ -490,7 +491,7 @@ function paintCanvas() {
 }
 
 function sendPosition(x, y) {
-    fetch(`http://localhost:8080/mokepon/${playerId}/position`, {
+    fetch(`http://192.168.10.114:8080/mokepon/${playerId}/position`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"

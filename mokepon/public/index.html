@@ -1,6 +1,6 @@
 <!-- 
-Consumiendo la API de ataques del enemigo
-Clase 82/84 • Curso Gratis de Programación Básica Optimización de la API de ataques del enemigo
+Probando el juego en varios dispositivos
+Clase 83/84 • Curso Gratis de Programación Básica
 -->
 <!DOCTYPE html>
 <html>
@@ -26,11 +26,11 @@ Clase 82/84 • Curso Gratis de Programación Básica Optimización de la API de
         Walk around the map with your mokepon
       </h2>
       <canvas id="map"></canvas>
-      <button onmouseup="stopMove()" onmousedown="moveUp()">Up</button>
+      <button ontouchend="stopMove()" ontouchstart="moveUp()" onmouseup="stopMove()" onmousedown="moveUp()">Up</button>
       <div>
-        <button onmouseup="stopMove()" onmousedown="moveLeft()">Left</button>
-        <button onmouseup="stopMove()" onmousedown="moveDown()">Down</button>
-        <button onmouseup="stopMove()" onmousedown="moveRight()">Right</button>
+        <button ontouchend="stopMove()" ontouchstart="moveLeft()" onmouseup="stopMove()" onmousedown="moveLeft()">Left</button>
+        <button ontouchend="stopMove()" ontouchstart="moveDown()" onmouseup="stopMove()" onmousedown="moveDown()">Down</button>
+        <button ontouchend="stopMove()" ontouchstart="moveRight()" onmouseup="stopMove()" onmousedown="moveRight()">Right</button>
       </div>
     </section>
 
