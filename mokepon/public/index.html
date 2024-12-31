@@ -1,0 +1,72 @@
+<!-- 
+Probando el juego en varios dispositivos
+Clase 83/84 • Curso Gratis de Programación Básica
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MOKEPON!</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <section id="select-pet">
+      <h1 id="tlMOKEMON" class="title">MOKEPON!</h1>
+
+      <h2 class="subtitle">Choose your pet:</h2>
+
+      <div id="containerCards" class="tarjetas"></div>
+      <p><button id="btn-pet" class="btn-select">Select</button></p>
+    </section>
+
+    <section id="view-map">
+      <h2 id="stlViewMap" class="subtitle">
+        Walk around the map with your mokepon
+      </h2>
+      <canvas id="map"></canvas>
+      <button ontouchend="stopMove()" ontouchstart="moveUp()" onmouseup="stopMove()" onmousedown="moveUp()">Up</button>
+      <div>
+        <button ontouchend="stopMove()" ontouchstart="moveLeft()" onmouseup="stopMove()" onmousedown="moveLeft()">Left</button>
+        <button ontouchend="stopMove()" ontouchstart="moveDown()" onmouseup="stopMove()" onmousedown="moveDown()">Down</button>
+        <button ontouchend="stopMove()" ontouchstart="moveRight()" onmouseup="stopMove()" onmousedown="moveRight()">Right</button>
+      </div>
+    </section>
+
+    <section id="select-attack">
+      <h1 id="tlMOKEMON" class="title">MOKEPON!</h1>
+
+      <h2>Elige tu ataque:</h2>
+
+      <div id="containerAttacks" class="card-attacks">
+        <!-- <button id="btn-fire" class="btn-select">Fire🔥</button>
+                <button id="btn-water" class="btn-select">Water💦</button>
+                <button id="btn-ground" class="btn-select">Ground🪨</button> -->
+      </div>
+
+      <div>
+        <section id="messages">
+          <p id="message"></p>
+        </section>
+
+        <section id="reset">
+          <p><button id="btn-reset" class="btn-select">Reset</button></p>
+        </section>
+      </div>
+      <div class="attacks">
+        <div class="player-attack">
+          <p id="player-live">0</p>
+          <p id="pet-player"></p>
+          <div id="message-attack-player"></div>
+        </div>
+        <div class="pc-attack">
+          <p id="pc-live">0</p>
+          <p id="pet-pc"></p>
+          <div id="message-attack-pc"></div>
+        </div>
+      </div>
+    </section>
+    <script src="./js/mokepon.js"></script>
+  </body>
+</html>
