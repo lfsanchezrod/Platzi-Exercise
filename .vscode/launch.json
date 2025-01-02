@@ -8,13 +8,13 @@
             "name": "Launch Chrome Mokepon",
             "request": "launch",
             "type": "chrome",
-            "file": "g:\\My Drive\\PLATZI\\Curso Gratis de Programación Básica\\Platzi-Exercise-1\\mokepon\\mokepon.html"
+            "file": "C:\\develops\\Platzi-Exercise\\mokepon\\mokepon.html"
         },
         {
             "type": "msedge",
             "request": "launch",
             "name": "Launch Edge Mokepon",
-            "file": "g:\\My Drive\\PLATZI\\Curso Gratis de Programación Básica\\Platzi-Exercise-1\\mokepon\\mokepon.html"
+            "file": "C:\\develops\\Platzi-Exercise\\mokepon\\mokepon.html"
         }
     ]
 }

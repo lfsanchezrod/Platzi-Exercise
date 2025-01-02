@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&family=Poppins:wght@300&display=swap');
+
+/* Set a background image for the entire page (usually applied to the <body> element) */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url("https://wallpaperaccess.com/full/94935.jpg");
+    background-position: top;
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+#select-pet {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    Background-color: rgb(255, 255, 255, 0.5);
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    width: 950px;
+    height: 50px;
+    font-family: 'Poor Story', cursive;
+    font-size: 60px;
+    text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.subtitle {
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    font-family: 'Poor Story', cursive;
+    font-size: 60px;
+    text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.mokepon-card {
+    width: 180px;
+    height: 100px;
+    background: rgb(254, 239, 208);
+    padding: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(78, 81, 146);
+    font-style: oblique;
+    border: 2px solid rgb(175, 51, 73);
+}
+
+.mokepon-card img {
+    width: 80px;
+}
+
+input {
+    display: none;
+}
+
+input:checked+label {
+    background-color: rgb(245, 112, 138);
+}
+
+#select-attack {
+    flex-direction: column;
+    align-items: center;
+    Background-color: rgb(255, 255, 255, 0.5);
+}
+
+.btn-select {
+    width: 210px;
+    height: 50px;
+    color: blueviolet;
+    padding: 10px;
+    margin: 10px;
+    /*border: 1px solid red;*/
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+
+.btn-select-attack {
+    width: 80px;
+    height: 50px;
+    color: blueviolet;
+    padding: 10px;
+    margin: 10px;
+    /*border: 1px solid red;*/
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.tarjetas,
+.tarjetas-ataques {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.attacks {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    color: rgb(0, 0, 0);
+}
+
+.player-attack,
+.pc-attack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width:360px) {
+
+    .tarjetas,
+    .tarjetas-ataques {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+#view-map {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#view-map button{
+    width: 80px;
+    height: 50px;
+    color: blueviolet;
+    padding: 10px;
+    margin: 10px;
+    /*border: 1px solid red;*/
+    border-radius: 20px;
+    margin: 10px 0;
+}
+
+@media (max-width:300px) {
+#view-map div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+}
